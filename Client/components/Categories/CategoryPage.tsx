@@ -9,6 +9,7 @@ import categoryDataHandler from '@/app/api/mainCategory';
 import Loading from '../Loading';
 import { categoryFilterHandler, categoryOnlyFilterHandler } from '@/app/api/filter';
 import CategoryMSidebar from '../Mobile-Interface/CategoryMSidebar';
+import { fallbackEcoProducts } from '@/app/data';
 interface categories{
     categoryid: number;
     name: string;
@@ -101,12 +102,24 @@ const CategoryPage = () => {
         switch (response.status) {
             case 200:
                 categoriesData.current = [...categoriesData.current,...response.data.data.categories];
-                if(response.data.data.products.length > 0) productsData.current = response.data.data.products
+                if(response.data.data.products && response.data.data.products.length > 0) {
+                  productsData.current = response.data.data.products;
+                } else {
+                  const catStr = String(specificCategory).toLowerCase();
+                  const matched = fallbackEcoProducts.filter(p => p.maincategory.toLowerCase() === catStr);
+                  productsData.current = (matched.length > 0 ? matched : fallbackEcoProducts) as any;
+                }
                 dataChecked.current = true;
                 setsidebarLoading(false);
                 setloading(false);
                 break;
             default:
+                const catStr = String(specificCategory).toLowerCase();
+                const matched = fallbackEcoProducts.filter(p => p.maincategory.toLowerCase() === catStr);
+                productsData.current = (matched.length > 0 ? matched : fallbackEcoProducts) as any;
+                dataChecked.current = true;
+                setsidebarLoading(false);
+                setloading(false);
                 break;
         }
     }

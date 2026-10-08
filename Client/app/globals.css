@@ -1,6 +1,106 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --eco-forest: #164c3b;
+  --eco-green: #2f8064;
+  --eco-leaf: #72a95a;
+  --eco-sage: #e7f0e6;
+  --eco-cream: #fbfaf4;
+  --eco-sand: #e8ddc8;
+  --eco-ink: #20352e;
+  --eco-muted: #68766f;
+}
+body {
+  background: var(--eco-cream);
+  color: var(--eco-ink);
+}
+.eco-score,
+.eco-pending {
+  border: 1px solid #cfe0d0;
+  border-radius: 0.75rem;
+  background: #f5faf3;
+  color: var(--eco-forest);
+  padding: 0.65rem 0.75rem;
+  font-size: 0.75rem;
+}
+.eco-pending {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  font-weight: 600;
+}
+.eco-pending--compact {
+  padding: 0.35rem 0.55rem;
+  font-size: 0.68rem;
+}
+.eco-score--compact {
+  padding: 0.35rem 0.55rem;
+}
+.eco-score__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+.eco-score__heading strong {
+  margin-left: auto;
+}
+.eco-score__leaf {
+  color: var(--eco-green);
+  font-size: 1rem;
+}
+.eco-score__bar {
+  height: 0.35rem;
+  margin: 0.45rem 0 0.25rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dbe8d8;
+}
+.eco-score__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--eco-green);
+}
+.eco-score__label {
+  font-weight: 600;
+}
+.eco-score__details {
+  margin-top: 0.6rem;
+  color: var(--eco-muted);
+}
+.eco-score__details p {
+  margin: 0;
+}
+.eco-score__details ul {
+  margin: 0.5rem 0 0 1rem;
+  list-style: disc;
+}
+.eco-score__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+.eco-score__tags span {
+  border-radius: 999px;
+  background: var(--eco-sage);
+  padding: 0.2rem 0.5rem;
+}
+.eco-score--excellent .eco-score__bar span { background: #237a54; }
+.eco-score--good .eco-score__bar span { background: #5a9d58; }
+.eco-score--moderate .eco-score__bar span { background: #b08a3d; }
+.eco-score--improve .eco-score__bar span { background: #b96548; }
+.eco-banner {
+  background: linear-gradient(120deg, #e5f1e2 0%, #f8f5e9 100%);
+  color: var(--eco-forest);
+}
+.eco-section-title {
+  color: var(--eco-forest);
+  letter-spacing: 0.08em;
+}
 .shadow-top {
   box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
 }

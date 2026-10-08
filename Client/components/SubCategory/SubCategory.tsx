@@ -8,6 +8,7 @@ import Loading from '@/components/Loading';
 import SearchMSidebar from '../Mobile-Interface/SearchMSidebar';
 import searchProductHandler, { searchFilteredHandler } from '@/app/api/search';
 import subCategoryDataHandler, { subCategoryFilteredHandler } from '@/app/api/subCategory';
+import { fallbackEcoProducts } from '@/app/data';
 interface categories{
     categoryid: number;
     name: string;
@@ -83,11 +84,29 @@ const SubCategory = () => {
         const response = await subCategoryDataHandler(specficMainCategory,specificCategory);
         switch (response.status) {
             case 200:
-                if(response.data.data.length > 0) {productsData.current = response.data.data;categoryID.current = response.data.categoryid;}
+                if(response.data.data && response.data.data.length > 0) {
+                  productsData.current = response.data.data;
+                  categoryID.current = response.data.categoryid;
+                } else {
+                  const normalizedSub = String(specificCategory).toLowerCase().replace(/-/g, ' ');
+                  const matched = fallbackEcoProducts.filter(p => 
+                    p.category.toLowerCase().includes(normalizedSub) || 
+                    p.maincategory.toLowerCase().includes(String(specficMainCategory).toLowerCase())
+                  );
+                  productsData.current = (matched.length > 0 ? matched : fallbackEcoProducts) as any;
+                }
                 dataChecked.current = true;
                 setloading(false);
                 break;
             default:
+                const normalizedSub = String(specificCategory).toLowerCase().replace(/-/g, ' ');
+                const matched = fallbackEcoProducts.filter(p => 
+                  p.category.toLowerCase().includes(normalizedSub) || 
+                  p.maincategory.toLowerCase().includes(String(specficMainCategory).toLowerCase())
+                );
+                productsData.current = (matched.length > 0 ? matched : fallbackEcoProducts) as any;
+                dataChecked.current = true;
+                setloading(false);
                 break;
         }
     }

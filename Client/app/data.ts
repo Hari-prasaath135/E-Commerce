@@ -1,913 +1,1090 @@
-import { title } from "process";
+// Eco-Friendly Platform Data & Categories
+// Completely transformed to sustainable, zero-waste, organic, and circular economy concepts
 
-const topCat = [{
-    imgLink:'https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/dress.svg',
-    name:"DRESS & FROCK",
-    quantity:53,
-    showLink:"/sub-category/fashion/dress-&-frock"
-},{
-    imgLink:'https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/coat.svg',
-    name:"INNERWEAR",
-    quantity:58,
-    showLink:"/sub-category/fashion/innerwear"
-},{
-    imgLink:'https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/glasses.svg ',
-    name:"SUNGLASSES",
-    quantity:32,
-    showLink:"/sub-category/men/sunglasses"
-},{
-    imgLink:'https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/shorts.svg',
-    name:"SHORTS & JEANS",
-    quantity:42,
-    showLink:"/sub-category/fashion/shorts-&-jeans"
-},{
-    imgLink:'https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/tee.svg',
-    name:"T-SHIRTS",
-    quantity:12,
-    showLink:"/sub-category/fashion/TShirt"
-},
-{
-    imgLink:'https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/jacket.svg',
-    name:"JACKET",
-    quantity:63,
-    showLink:"/sub-category/men/jacket"
-},
-{
-    imgLink:'https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/watch.svg',
-    name:"SMART WATCH",
-    quantity:42,
-    showLink:"/sub-category/electronics/smart-watch"
-},{
-    imgLink:'https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/hat.svg',
-    name:"HAIR GEL",
-    quantity:29,
-    showLink:"/sub-category/cosmetics/hair-gel"
-}];
-const navBtns = [
-    {name:"Home",isExtendable:false,extendables:[],catLink:'/'},
-    {name:"Categories",isExtendable:false,extendables:[],catLink:''},
-    {name:"Men's",isExtendable:true,extendables:[
-        {
-          title: "Shirt",
-          link: "/sub-category/men/shirt",
-        },
-        {
-          title: "Shorts & Jeans",
-          link: "/sub-category/fashion/shorts-&-jeans",
-        },
-        {
-          title: "Safety Shoes",
-          link: "/sub-category/footwear/safety-shoes",
-        },
-        {
-          title: "Wallet",
-          link: "/sub-category/men/wallet",
-        },
-      ],catLink:'/categories/men'},
-    {name:"Women's",isExtendable:true,extendables:[
-        {
-            title: "Dress & Frock", // Combined Dress and Frock
-            link: "/sub-category/women/dress-&-frock",
-          },
-          {
-            title: "Earrings",
-            link: "/sub-category/women/earrings",
-          },
-          {
-            title: "Necklace",
-            link:"/sub-category/women/necklace",
-          },
-          {
-            title: "Makeup Kit",
-            link: "/sub-category/women/makeup-kit",
-          },
-    ],catLink:'/categories/women'},
-    {name:"Jewelry",isExtendable:true,extendables:[
-        {
-            title: "Necklace",
-            link: "/sub-category/jewellery/necklace",
-          },
-          {
-            title: "Earrings",
-            link: "/sub-category/jewellery/earrings",
-          },
-          {
-            title: "Couple Rings",
-            link: "/sub-category/jewellery/couple-rings",
-          },
-          {
-            title: "Bracelets",
-            link: "/sub-category/jewellery/bracelets",
-          },
-    ],catLink:'/categories/jewellery'},
-    {name:"Perfume",isExtendable:true,extendables:[
-          {
-            title: "Clothes Perfume",
-            link: "/sub-category/perfume/clothes-perfume",
-          },
-          {
-            title: "Deodorant",
-            link: "/sub-category/perfume/deodorant",
-          },
-          {
-            title: "Flower Fragrance",
-            link: "/sub-category/perfume/flower-fragrance",
-          },
-          {
-            title: "Air Freshener",
-            link: "/sub-category/perfume/air-freshener",
-          },
-    ],catLink:'/categories/perfume'},
+const topCat = [
     {
-        name: "Cosmetics",
-        isExtendable: true,
-        extendables: [
-          {
-            title: "Body Soap",
-            link: "/sub-category/cosmetics/body-soap",
-          },
-          {
-            title: "Shampoo",
-            link: "/sub-category/cosmetics/shampoo",
-          },
-          {
-            title: "Perfume",
-            link: "/sub-category/cosmetics/perfume",
-          },
-          {
-            title: "Body Wash",
-            link: "/sub-category/cosmetics/bodywash",
-          }
-        ],
-        catLink: "/categories/cosmetics"
-      },
-      {
-        name: "Footwear",
-        isExtendable: true,
-        extendables: [
-          {
-            title: "Long Shoes",
-            link: "/sub-category/footwear/long-shoes",
-          },
-          {
-            title: "First Copy",
-            link: "/sub-category/footwear/firstcopy",
-          },
-          {
-            title: "Cowboy Shoes",
-            link: "/sub-category/footwear/cowboy-shoes",
-          },
-          {
-            title: "Safety Shoes",
-            link: "/sub-category/footwear/safety-shoes",
-          }
-        ],
-        catLink: "/categories/footwear"
-      },
-      {
-        name: "Fashion",
-        isExtendable: true,
-        extendables: [
-          {
-            title: "Innerwear",
-            link: "/sub-category/fashion/innerwear",
-          },
-          {
-            title: "Shirts",
-            link: "/sub-category/fashion/shirts",
-          },
-          {
-            title: "Dress & Frock",
-            link: "/sub-category/fashion/dress-&-frock",
-          },
-          {
-            title: "Jacket",
-            link: "/sub-category/fashion/jacket",
-          }
-        ],
-        catLink: "/categories/fashion"
-      },
-    {name:"Blog",isExtendable:false,extendables:[],catLink:'/blog'}
+        imgLink: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=120&q=80',
+        name: "ORGANIC APPAREL",
+        quantity: 64,
+        showLink: "/sub-category/fashion/organic-cotton"
+    },
+    {
+        imgLink: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=120&q=80',
+        name: "ZERO-WASTE LIVING",
+        quantity: 82,
+        showLink: "/sub-category/fashion/zero-waste"
+    },
+    {
+        imgLink: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=120&q=80',
+        name: "CORK & RECYCLED SHOES",
+        quantity: 41,
+        showLink: "/sub-category/footwear/cork-walkers"
+    },
+    {
+        imgLink: 'https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=120&q=80',
+        name: "SOLAR & CLEAN TECH",
+        quantity: 35,
+        showLink: "/sub-category/electronics/solar-chargers"
+    },
+    {
+        imgLink: 'https://images.unsplash.com/photo-1608248597359-07b973f55403?auto=format&fit=crop&w=120&q=80',
+        name: "BOTANICAL WELLNESS",
+        quantity: 58,
+        showLink: "/sub-category/cosmetics/shampoo-bars"
+    },
+    {
+        imgLink: 'https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=120&q=80',
+        name: "BAMBOO HOME",
+        quantity: 73,
+        showLink: "/sub-category/fashion/bamboo-kitchen"
+    },
+    {
+        imgLink: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=120&q=80',
+        name: "RECLAIMED WOOD GEAR",
+        quantity: 29,
+        showLink: "/sub-category/electronics/wood-watches"
+    },
+    {
+        imgLink: 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=120&q=80',
+        name: "NATURAL AROMATHERAPY",
+        quantity: 47,
+        showLink: "/sub-category/perfume/essential-oils"
+    }
 ];
+
+const navBtns = [
+    { name: "Home", isExtendable: false, extendables: [], catLink: '/' },
+    { name: "Categories", isExtendable: false, extendables: [], catLink: '' },
+    {
+        name: "Eco Apparel",
+        isExtendable: true,
+        extendables: [
+            { title: "Organic Cotton Basics", link: "/sub-category/fashion/organic-cotton" },
+            { title: "Hemp & Linen Casuals", link: "/sub-category/fashion/hemp-linen" },
+            { title: "Recycled Wool & Fleece", link: "/sub-category/fashion/recycled-fleece" },
+            { title: "Bamboo Fiber Wear", link: "/sub-category/fashion/bamboo-wear" },
+        ],
+        catLink: '/categories/fashion'
+    },
+    {
+        name: "Zero-Waste Home",
+        isExtendable: true,
+        extendables: [
+            { title: "Reusable Beeswax Wraps", link: "/sub-category/fashion/beeswax-wraps" },
+            { title: "Bamboo Kitchen Utensils", link: "/sub-category/fashion/bamboo-kitchenware" },
+            { title: "Stainless Steel Containers", link: "/sub-category/fashion/steel-containers" },
+            { title: "Coconut Fiber Cleaners", link: "/sub-category/fashion/coconut-cleaners" },
+        ],
+        catLink: '/categories/fashion'
+    },
+    {
+        name: "Sustainable Footwear",
+        isExtendable: true,
+        extendables: [
+            { title: "Cork Sole Walkers", link: "/sub-category/footwear/cork-walkers" },
+            { title: "Natural Rubber Slides", link: "/sub-category/footwear/natural-rubber" },
+            { title: "Recycled Ocean Canvas", link: "/sub-category/footwear/recycled-canvas" },
+            { title: "Organic Cotton Slip-Ons", link: "/sub-category/footwear/cotton-slips" },
+        ],
+        catLink: '/categories/footwear'
+    },
+    {
+        name: "Botanical Care",
+        isExtendable: true,
+        extendables: [
+            { title: "Zero-Waste Shampoo Bars", link: "/sub-category/cosmetics/shampoo-bars" },
+            { title: "Cold-Pressed Body Soap", link: "/sub-category/cosmetics/botanical-soap" },
+            { title: "Mineral Reef-Safe Sunscreen", link: "/sub-category/cosmetics/mineral-sunscreen" },
+            { title: "Soy Wax Botanical Candles", link: "/sub-category/cosmetics/soy-candles" },
+        ],
+        catLink: '/categories/cosmetics'
+    },
+    {
+        name: "Clean Tech",
+        isExtendable: true,
+        extendables: [
+            { title: "Solar Power Banks", link: "/sub-category/electronics/solar-chargers" },
+            { title: "Bamboo Mechanical Keyboards", link: "/sub-category/electronics/bamboo-keyboards" },
+            { title: "Biodegradable Phone Cases", link: "/sub-category/electronics/compostable-cases" },
+            { title: "Reclaimed Wood Solar Watches", link: "/sub-category/electronics/wood-watches" },
+        ],
+        catLink: '/categories/electronics'
+    },
+    {
+        name: "Ethical Jewelry",
+        isExtendable: true,
+        extendables: [
+            { title: "Recycled Silver Pendants", link: "/sub-category/jewellery/recycled-silver" },
+            { title: "Tagua Nut Botanical Earrings", link: "/sub-category/jewellery/tagua-earrings" },
+            { title: "Upcycled Wood Bracelets", link: "/sub-category/jewellery/wood-bracelets" },
+            { title: "Ocean Sea Glass Rings", link: "/sub-category/jewellery/sea-glass" },
+        ],
+        catLink: '/categories/jewellery'
+    },
+    { name: "Blog", isExtendable: false, extendables: [], catLink: '/blog' }
+];
+
 const leftStatus = [
     {
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/dress.svg",
-        title:"Clothes",
-        links:[
-            {
-                title:"Shirt",
-                link:"/sub-category/clothes/shirt",
-                quantity:50,
-            },
-            {
-                title:"Shorts & Jeans",
-                link:"/sub-category/clothes/shorts-&-jeans",
-                quantity:50,
-            },
-            {
-                title:"Jacket",
-                link:"/sub-category/clothes/jacket",
-                quantity:50,
-            },
-            {
-                title:"Dress & Frock",
-                link:"/sub-category/clothes/dress-&-frock",
-                quantity:50,
-            }
+        imgLink: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=40&q=80",
+        title: "Eco Apparel",
+        links: [
+            { title: "Organic Cotton Basics", link: "/sub-category/fashion/organic-cotton", quantity: 38 },
+            { title: "Hemp & Linen Casuals", link: "/sub-category/fashion/hemp-linen", quantity: 24 },
+            { title: "Recycled Fleece Outerwear", link: "/sub-category/fashion/recycled-fleece", quantity: 19 },
+            { title: "Bamboo Loungewear", link: "/sub-category/fashion/bamboo-wear", quantity: 31 }
         ]
     },
     {
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/shoes.svg",
-        title:"Footwear",
-        links:[
-            {
-                title:"Sport",
-                link:"/sub-category/footwear/sport",
-                quantity:50,
-            },
-            {
-                title:"Formal",
-                link:"/sub-category/footwear/formal",
-                quantity:50,
-            },
-            {
-                title:"Casual",
-                link:"/sub-category/footwear/casual",
-                quantity:50,
-            },
-            {
-                title:"Safety Shoes",
-                link:"/sub-category/footwear/safety-shoes",
-                quantity:50,
-            }
+        imgLink: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=40&q=80",
+        title: "Sustainable Footwear",
+        links: [
+            { title: "Cork Sole Walkers", link: "/sub-category/footwear/cork-walkers", quantity: 22 },
+            { title: "Natural Rubber Slides", link: "/sub-category/footwear/natural-rubber", quantity: 18 },
+            { title: "Recycled Ocean Canvas", link: "/sub-category/footwear/recycled-canvas", quantity: 27 },
+            { title: "Organic Cotton Slips", link: "/sub-category/footwear/cotton-slips", quantity: 16 }
         ]
     },
     {
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/jewelry.svg",
-        title:"Jewelry",
-        links:[
-            {
-                title:"Earrings",
-                link:"/sub-category/jewellery/earrings",
-                quantity:50,
-            },
-            {
-                title:"Couple Rings",
-                link:"/sub-category/jewellery/couple-rings",
-                quantity:50,
-            },
-            {
-                title:"Necklace",
-                link:"/sub-category/jewellery/necklace",
-                quantity:50,
-            }
+        imgLink: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=40&q=80",
+        title: "Zero-Waste Home",
+        links: [
+            { title: "Reusable Beeswax Wraps", link: "/sub-category/fashion/beeswax-wraps", quantity: 45 },
+            { title: "Bamboo Utensil Sets", link: "/sub-category/fashion/bamboo-kitchenware", quantity: 32 },
+            { title: "Stainless Steel Bottles", link: "/sub-category/fashion/steel-containers", quantity: 29 },
+            { title: "Coconut Fiber Dish Brushes", link: "/sub-category/fashion/coconut-cleaners", quantity: 41 }
         ]
     },
     {
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/perfume.svg",
-        title:"Perfume",
-        links:[
-            {
-                title:"Clothes Perfume",
-                link:"/sub-category/perfume/clothes-perfume",
-                quantity:50,
-            },
-            {
-                title:"Deodorant",
-                link:"/sub-category/perfume/deodorant",
-                quantity:50,
-            },
-            {
-                title:"Air Freshener",
-                link:"/sub-category/perfume/air-freshener",
-                quantity:50,
-            },
+        imgLink: "https://images.unsplash.com/photo-1608248597359-07b973f55403?auto=format&fit=crop&w=40&q=80",
+        title: "Botanical Care",
+        links: [
+            { title: "Zero-Waste Shampoo Bars", link: "/sub-category/cosmetics/shampoo-bars", quantity: 34 },
+            { title: "Cold-Pressed Soap Bars", link: "/sub-category/cosmetics/botanical-soap", quantity: 42 },
+            { title: "Mineral Reef Sunscreen", link: "/sub-category/cosmetics/mineral-sunscreen", quantity: 25 },
+            { title: "Soy Wax Botanical Candles", link: "/sub-category/cosmetics/soy-candles", quantity: 30 }
         ]
     },
     {
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/cosmetics.svg",
-        title:"Cosmetics",
-        links:[
-            {
-                title:"Shampoo",
-                link:"/sub-category/cosmetics/shampoo",
-                quantity:50,
-            },
-            {
-                title:"Sunscreen",
-                link:"/sub-category/cosmetics/sunscreen",
-                quantity:50,
-            },
-            {
-                title:"Body Wash",
-                link:"/sub-category/cosmetics/bodywash",
-                quantity:50,
-            },
-            {
-                title:"Makeup Kit",
-                link:"/sub-category/cosmetics/makeup-kit",
-                quantity:50,
-            }
+        imgLink: "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=40&q=80",
+        title: "Clean Tech & Solar",
+        links: [
+            { title: "Solar Power Banks", link: "/sub-category/electronics/solar-chargers", quantity: 21 },
+            { title: "Bamboo Keyboards", link: "/sub-category/electronics/bamboo-keyboards", quantity: 15 },
+            { title: "Compostable Phone Cases", link: "/sub-category/electronics/compostable-cases", quantity: 39 },
+            { title: "Reclaimed Wood Solar Watches", link: "/sub-category/electronics/wood-watches", quantity: 18 }
         ]
     },
     {
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/glasses.svg",
-        title:"Men",
-        links:[
-            {
-                title:"Sunglasses",
-                link:"/sub-category/men/sunglasses",
-                quantity:50,
-            },
-            {
-                title:"Casual",
-                link:"/sub-category/men/casual",
-                quantity:50,
-            }
+        imgLink: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=40&q=80",
+        title: "Ethical Jewelry",
+        links: [
+            { title: "Recycled Silver Pendants", link: "/sub-category/jewellery/recycled-silver", quantity: 18 },
+            { title: "Tagua Nut Earrings", link: "/sub-category/jewellery/tagua-earrings", quantity: 24 },
+            { title: "Reclaimed Wood Bracelets", link: "/sub-category/jewellery/wood-bracelets", quantity: 19 },
+            { title: "Ocean Sea Glass Rings", link: "/sub-category/jewellery/sea-glass", quantity: 15 }
         ]
     },
     {
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/icons/bag.svg",
-        title:"Bags",
-        links:[
-            {
-                title:"Shopping Bag",
-                link:"/sub-category/women/bags",
-                quantity:50,
-            },
-            {
-                title:"Gym Backpack",
-                link:"/sub-category/women/bags",
-                quantity:50,
-            },
-            {
-                title:"Purse",
-                link:"/sub-category/women/bags",
-                quantity:50,
-            },
-            {
-                title:"Wallet",
-                link:"/sub-category/men/wallet",
-                quantity:50,
-            }
-        ]
-    }
-]
-const footerCategories = [
-    {
-        name: 'FASHION',
-        subcategories: [
-            { name: 'T-Shirt', subcatLink: '/sub-category/fashion/TShirt' },
-            { name: 'Shirts', subcatLink: '/sub-category/fashion/shirts' },
-            { name: 'Shorts & Jeans', subcatLink: '/sub-category/fashion/shorts-&-jeans' },
-            { name: 'Jacket', subcatLink: '/sub-category/fashion/jacket' },
-            { name: 'Dress & Frock', subcatLink: '/sub-category/fashion/dress-&-frock' },
-            { name: 'Innerwear', subcatLink: '/sub-category/fashion/innerwear' },
-            { name: 'Hosiery', subcatLink: '/sub-category/fashion/hosiery' }
-        ]
-    },
-    {
-        name: 'FOOTWEAR',
-        subcategories: [
-            { name: 'Sport', subcatLink: '/sub-category/footwear/sport' },
-            { name: 'Formal', subcatLink: '/sub-category/footwear/formal' },
-            { name: 'Boots', subcatLink: '/sub-category/footwear/boots' },
-            { name: 'Casual', subcatLink: '/sub-category/footwear/casual' },
-            { name: 'Cowboy Shoes', subcatLink: '/sub-category/footwear/cowboy-shoes' },
-            { name: 'Safety Shoes', subcatLink: '/sub-category/footwear/safety-shoes' },
-            { name: 'Party Wear Shoes', subcatLink: '/sub-category/footwear/party-wear-shoes' },
-            { name: 'Branded', subcatLink: '/sub-category/footwear/branded' },
-            { name: 'Firstcopy', subcatLink: '/sub-category/footwear/firstcopy' },
-            { name: 'Long Shoes', subcatLink: '/sub-category/footwear/long-shoes' }
-        ]
-    },
-    {
-        name: 'JEWELLERY',
-        subcategories: [
-            { name: 'Necklace', subcatLink: '/sub-category/jewellery/necklace' },
-            { name: 'Earrings', subcatLink: '/sub-category/jewellery/earrings' },
-            { name: 'Couple Rings', subcatLink: '/sub-category/jewellery/couple-rings' },
-            { name: 'Pendants', subcatLink: '/sub-category/jewellery/pendants' },
-            { name: 'Crystal', subcatLink: '/sub-category/jewellery/crystal' },
-            { name: 'Bangles', subcatLink: '/sub-category/jewellery/bangles' },
-            { name: 'Bracelets', subcatLink: '/sub-category/jewellery/bracelets' },
-            { name: 'Nosepin', subcatLink: '/sub-category/jewellery/nosepin' },
-            { name: 'Chain', subcatLink: '/sub-category/jewellery/chain' },
-            { name: 'Earrings', subcatLink: '/sub-category/jewellery/earrings' },
-            { name: 'Couple Rings', subcatLink: '/sub-category/jewellery/couple-rings' }
-        ]
-    },
-    {
-        name: 'COSMETICS',
-        subcategories: [
-            { name: 'Shampoo', subcatLink: '/sub-category/cosmetics/shampoo' },
-            { name: 'Bodywash', subcatLink: '/sub-category/cosmetics/bodywash' },
-            { name: 'Facewash', subcatLink: '/sub-category/cosmetics/facewash' },
-            { name: 'Makeup Kit', subcatLink: '/sub-category/cosmetics/makeup-kit' },
-            { name: 'Liner', subcatLink: '/sub-category/cosmetics/liner' },
-            { name: 'Lipstick', subcatLink: '/sub-category/cosmetics/lipstick' },
-            { name: 'Perfume', subcatLink: '/sub-category/cosmetics/perfume' },
-            { name: 'Body Soap', subcatLink: '/sub-category/cosmetics/body-soap' },
-            { name: 'Scrub', subcatLink: '/sub-category/cosmetics/scrub' },
-            { name: 'Hair Gel', subcatLink: '/sub-category/cosmetics/hair-gel' },
-            { name: 'Hair Colors', subcatLink: '/sub-category/cosmetics/hair-colors' },
-            { name: 'Hair Dye', subcatLink: '/sub-category/cosmetics/hair-dye' },
-            { name: 'Sunscreen', subcatLink: '/sub-category/cosmetics/sunscreen' },
-            { name: 'Skin Lotion', subcatLink: '/sub-category/cosmetics/skin-lotion' },
-            { name: 'Liner', subcatLink: '/sub-category/cosmetics/liner' },
-            { name: 'Lipstick', subcatLink: '/sub-category/cosmetics/lipstick' }
+        imgLink: "https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=40&q=80",
+        title: "Earth Bags & Carry",
+        links: [
+            { title: "Organic Canvas Grocery Totes", link: "/sub-category/fashion/canvas-totes", quantity: 50 },
+            { title: "Cork Leather Wallets", link: "/sub-category/fashion/cork-wallets", quantity: 28 },
+            { title: "Handwoven Jute Backpacks", link: "/sub-category/fashion/jute-backpacks", quantity: 22 },
+            { title: "Upcycled Cotton Messengers", link: "/sub-category/fashion/upcycled-bags", quantity: 17 }
         ]
     }
 ];
+
+const footerCategories = [
+    {
+        name: 'ECO APPAREL',
+        subcategories: [
+            { name: 'Organic Cotton Basics', subcatLink: '/sub-category/fashion/organic-cotton' },
+            { name: 'Hemp & Linen Wear', subcatLink: '/sub-category/fashion/hemp-linen' },
+            { name: 'Recycled Fleece Outerwear', subcatLink: '/sub-category/fashion/recycled-fleece' },
+            { name: 'Bamboo Fiber Loungewear', subcatLink: '/sub-category/fashion/bamboo-wear' },
+            { name: 'Botanical Plant Dyed', subcatLink: '/sub-category/fashion/plant-dyed' }
+        ]
+    },
+    {
+        name: 'SUSTAINABLE FOOTWEAR',
+        subcategories: [
+            { name: 'Cork Sole Walkers', subcatLink: '/sub-category/footwear/cork-walkers' },
+            { name: 'Natural Rubber Slides', subcatLink: '/sub-category/footwear/natural-rubber' },
+            { name: 'Recycled Canvas Sneakers', subcatLink: '/sub-category/footwear/recycled-canvas' },
+            { name: 'Organic Cotton Slips', subcatLink: '/sub-category/footwear/cotton-slips' },
+            { name: 'Vegan Piñatex Boots', subcatLink: '/sub-category/footwear/pinatex-boots' }
+        ]
+    },
+    {
+        name: 'ZERO-WASTE LIVING',
+        subcategories: [
+            { name: 'Reusable Beeswax Wraps', subcatLink: '/sub-category/fashion/beeswax-wraps' },
+            { name: 'Bamboo Cutlery & Straws', subcatLink: '/sub-category/fashion/bamboo-kitchenware' },
+            { name: 'Stainless Food Jars', subcatLink: '/sub-category/fashion/steel-containers' },
+            { name: 'Coconut Fiber Cleaners', subcatLink: '/sub-category/fashion/coconut-cleaners' },
+            { name: 'Organic Canvas Totes', subcatLink: '/sub-category/fashion/canvas-totes' }
+        ]
+    },
+    {
+        name: 'BOTANICAL WELLNESS',
+        subcategories: [
+            { name: 'Zero-Waste Shampoo Bars', subcatLink: '/sub-category/cosmetics/shampoo-bars' },
+            { name: 'Cold-Pressed Herbal Soaps', subcatLink: '/sub-category/cosmetics/botanical-soap' },
+            { name: 'Reef-Safe Mineral Sunscreen', subcatLink: '/sub-category/cosmetics/mineral-sunscreen' },
+            { name: 'Pure Botanical Essential Oils', subcatLink: '/sub-category/perfume/essential-oils' },
+            { name: 'Soy Wax Hand-Poured Candles', subcatLink: '/sub-category/cosmetics/soy-candles' }
+        ]
+    }
+];
+
 const footerSections = [
     {
         sectionName: "Popular Categories",
         items: [
-            {
-                title: "Fashion",
-                link: "/categories/fashion"
-            },
-            {
-                title: "Electronic",
-                link: "/categories/electronics"
-            },
-            {
-                title: "Cosmetic",
-                link: "/categories/cosmetics"
-            },
-            {
-                title: "Footwear",
-                link: "/categories/footwear"
-            },
-            {
-                title: "Perfume",
-                link: "/categories/perfume"
-            }
+            { title: "Organic Apparel", link: "/categories/fashion" },
+            { title: "Sustainable Footwear", link: "/categories/footwear" },
+            { title: "Botanical Wellness", link: "/categories/cosmetics" },
+            { title: "Clean Tech & Solar", link: "/categories/electronics" },
+            { title: "Ethical Jewelry", link: "/categories/jewellery" }
         ]
     },
     {
-        sectionName: "Products",
+        sectionName: "Sustainability & Store",
         items: [
-            // {
-            //     title: "Prices Drop",
-            //     link: "products/price-drop"
-            // },
-            // {
-            //     title: "New Products",
-            //     link: "products/new-products"
-            // },
-            {
-                title: "Blog",
-                link: "/blog"
-            },
-            {
-                title: "Contact Us",
-                link: "/contact"
-            },
-            {
-                title: "Our Services",
-                link: "/our-services"
-            }
+            { title: "Sustainability Blog", link: "/blog" },
+            { title: "Eco Advisory & Contact", link: "/contact" },
+            { title: "Our Eco Services & Impact", link: "/our-services" }
         ]
     },
     {
-        sectionName: "Our Company",
+        sectionName: "Our Commitment",
         items: [
-            {
-                title: "About Us",
-                link: "/about"
-            },
-            {
-                title: "Privacy Policy",
-                link: "/policy/privacypolicy"
-            },
-            {
-                title: "Secure Payment",
-                link: "/securepayment"
-            },
-            {
-                title: "Terms And Conditions",
-                link: "/policy/terms&conditions"
-            },
-            {
-                title: "Refund & Cancellation",
-                link: "/policy/refund&cancellation"
-            }
+            { title: "About Our Mission", link: "/about" },
+            { title: "Privacy Policy", link: "/policy/privacypolicy" },
+            { title: "Secure Ethical Checkout", link: "/securepayment" },
+            { title: "Terms & Fair Practices", link: "/policy/terms&conditions" },
+            { title: "Circular Return Policy", link: "/policy/refund&cancellation" }
         ]
     },
     {
-        sectionName: 'Contact',
+        sectionName: 'Sustainable Hub',
         items: [
-            {title:'419 State 414 Rte Beaver Dams, New York(NY), 14812, USA',link:"#"},
-            {title:'(607) 936-8058',link:"#"},
-            {title:'Example@Gmail.Com',link:"#"}
+            { title: 'EcoBloom Circular Living HQ, Portland, OR 97201', link: "#" },
+            { title: '+1 (800) 456-ECO1', link: "#" },
+            { title: 'care@ecobloom-market.com', link: "#" }
         ]
     }
 ];
+
 const featuresSec = [
     {
-        title: "Worldwide Delivery",
-        description: "For Order Over $100",
-        siteLink:"",
-        icon:'fa-solid fa-ship fa-2xl',
+        title: "Carbon-Neutral Delivery",
+        description: "100% emission offset on every order",
+        siteLink: "/our-services",
+        icon: 'fa-solid fa-leaf fa-2xl',
     },
     {
-        title: "Next Day Delivery",
-        description: "Tier-1 City Orders Only",
-        siteLink:"",
-        icon:'fa-solid fa-rocket fa-2xl',
+        title: "Plastic-Free Packaging",
+        description: "Compostable mailers & paper tape",
+        siteLink: "/our-services",
+        icon: 'fa-solid fa-box-open fa-2xl',
     },
     {
-        title: "Best Online Support",
-        description: "Hours: 8AM - 11PM",
-        siteLink:"",
-        icon:'fa-solid fa-phone fa-2xl',
+        title: "Fair Trade & Ethical",
+        description: "Direct-trade certified artisans",
+        siteLink: "/our-services",
+        icon: 'fa-solid fa-handshake-angle fa-2xl',
     },
     {
-        title: "Return Policy",
-        description: "Easy & Free Return",
-        siteLink:"",
-        icon:'fa-solid fa-backward fa-2xl',
+        title: "Circular Return & Recycle",
+        description: "Return old items for store credit",
+        siteLink: "/our-services",
+        icon: 'fa-solid fa-recycle fa-2xl',
     },
     {
-        title: "30% Money Back",
-        description: "For Order Over $100",
-        siteLink:"",
-        icon:'fa-solid fa-gift fa-2xl',
+        title: "1% For The Planet",
+        description: "Portion of all profits plants native trees",
+        siteLink: "/our-services",
+        icon: 'fa-solid fa-seedling fa-2xl',
     }
 ];
+
 const currentEvent = {
-    discount:25,
-    titleFirst:"Summer",
-    titleLast:"Collection",
-    starting:10,
-    isDiscount:true,
-    eventLink:''
-}
+    discount: 30,
+    titleFirst: "Spring Zero-Waste",
+    titleLast: "Living Festival",
+    starting: 12,
+    isDiscount: true,
+    eventLink: '/categories/fashion'
+};
+
 const testimonial = {
-    imgLink:'https://codewithsadee.github.io/anon-ecommerce-website/assets/images/testimonial-1.jpg',
-    name:'ALAN DOE',
-    position:'CEO & Founder Invision',
-    description:'Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet.'
-}
+    imgLink: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    name: 'ELENA ROSTOVA',
+    position: 'Environmental Scientist & Verified Buyer',
+    description: 'Switching our home to EcoBloom zero-waste essentials reduced our household plastic by 80%. Exceptional quality, plastic-free shipping, and truly transparent eco-scores!'
+};
+
 const categoryDropDown = [
     {
-        title:'Electronics',
-        catLink:"/electronics",
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/electronics-banner-1.jpg",
-        imgAlt:"",
-        imgRedirectLink:"",
-        subCategories:[
-            {
-                title:"Desktop",
-                link:"/sub-category/electronics/desktop",
-            },
-            {
-                title:"Laptop",
-                link:"/sub-category/electronics/laptop",
-            },
-            {
-                title:"Camera",
-                link:"/sub-category/electronics/camera",
-            },
-            {
-                title:"Tablet",
-                link:"/sub-category/electronics/tablet",
-            },
-            {
-                title:"Headphone",
-                link:"/sub-category/electronics/headphone",
-            },
+        title: 'Clean Tech',
+        catLink: "/categories/electronics",
+        imgLink: "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=600&q=80",
+        imgAlt: "Solar & Clean Tech Banner",
+        imgRedirectLink: "/categories/electronics",
+        subCategories: [
+            { title: "Solar Power Banks", link: "/sub-category/electronics/solar-chargers" },
+            { title: "Bamboo Keyboards", link: "/sub-category/electronics/bamboo-keyboards" },
+            { title: "Biodegradable Phone Cases", link: "/sub-category/electronics/compostable-cases" },
+            { title: "Reclaimed Wood Solar Watches", link: "/sub-category/electronics/wood-watches" },
+            { title: "Eco Bluetooth Audio", link: "/sub-category/electronics/eco-speakers" },
         ]
     },
     {
-        title:"Men's",
-        catLink:"/men",
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/mens-banner.jpg",
-        imgAlt:"",
-        imgRedirectLink:"",
-        subCategories:[
-            {
-                title:"Formal",
-                link:"/sub-category/men/formal",
-            },
-            {
-                title:"Casual",
-                link:"/sub-category/men/casual",
-            },
-            {
-                title:"Sport",
-                link:"/sub-category/men/sports", 
-            },
-            {
-                title:"Jacket",
-                link:"/sub-category/men/jacket",
-            },
-            {
-                title:"Sunglasses",
-                link:"/sub-category/men/sunglasses",
-            },
+        title: "Eco Apparel",
+        catLink: "/categories/fashion",
+        imgLink: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=600&q=80",
+        imgAlt: "Organic Apparel Banner",
+        imgRedirectLink: "/categories/fashion",
+        subCategories: [
+            { title: "Organic Cotton Basics", link: "/sub-category/fashion/organic-cotton" },
+            { title: "Hemp & Linen Casuals", link: "/sub-category/fashion/hemp-linen" },
+            { title: "Recycled Wool & Fleece", link: "/sub-category/fashion/recycled-fleece" },
+            { title: "Bamboo Fiber Loungewear", link: "/sub-category/fashion/bamboo-wear" },
+            { title: "Cork Wallets & Carry", link: "/sub-category/fashion/cork-wallets" },
         ]
     },
     {
-        title:"Women's",
-        catLink:"/women",
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/womens-banner.jpg",
-        imgAlt:"",
-        imgRedirectLink:"",
-        subCategories:[
-            {
-                title:"Formal",
-                link:"/sub-category/women/formal",
-            },
-            {
-                title:"Casual",
-                link:"/sub-category/women/casual", 
-            },
-            {
-                title:"Perfume",
-                link:"/sub-category/women/perfume",
-            },
-            {
-                title:"Cosmetics",
-                link:"/sub-category/women/cosmetics",
-            },
-            {
-                title:"Bags",
-                link:"/sub-category/women/bags",
-            },
+        title: "Botanical Care",
+        catLink: "/categories/cosmetics",
+        imgLink: "https://images.unsplash.com/photo-1608248597359-07b973f55403?auto=format&fit=crop&w=600&q=80",
+        imgAlt: "Botanical Wellness Banner",
+        imgRedirectLink: "/categories/cosmetics",
+        subCategories: [
+            { title: "Zero-Waste Shampoo Bars", link: "/sub-category/cosmetics/shampoo-bars" },
+            { title: "Cold-Pressed Soap Bars", link: "/sub-category/cosmetics/botanical-soap" },
+            { title: "Mineral Reef Sunscreen", link: "/sub-category/cosmetics/mineral-sunscreen" },
+            { title: "Soy Wax Botanical Candles", link: "/sub-category/cosmetics/soy-candles" },
+            { title: "Pure Essential Oil Aromas", link: "/sub-category/perfume/essential-oils" },
         ]
     },
     {
-        title:'Electronics',
-        catLink:"/electronics",
-        imgLink:"https://codewithsadee.github.io/anon-ecommerce-website/assets/images/electronics-banner-2.jpg",
-        imgAlt:"",
-        imgRedirectLink:"",
-        subCategories:[
-            {
-                title:"Smart Watch",
-                link:"/sub-category/electronics/smart-watch",
-            },
-            {
-                title:"Smart TV",
-                link:"/sub-category/electronics/smart-TV",
-            },
-            {
-                title:"Keyboard",
-                link:"/sub-category/electronics/keyboard",
-            },
-            {
-                title:"Mouse",
-                link:"/sub-category/electronics/mouse",
-            },
-            {
-                title:"Microphone",
-                link:"/sub-category/electronics/microphone",
-            },
+        title: 'Sustainable Footwear',
+        catLink: "/categories/footwear",
+        imgLink: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=600&q=80",
+        imgAlt: "Eco Footwear Banner",
+        imgRedirectLink: "/categories/footwear",
+        subCategories: [
+            { title: "Cork Sole Walkers", link: "/sub-category/footwear/cork-walkers" },
+            { title: "Natural Rubber Slides", link: "/sub-category/footwear/natural-rubber" },
+            { title: "Recycled Ocean Canvas", link: "/sub-category/footwear/recycled-canvas" },
+            { title: "Organic Cotton Slips", link: "/sub-category/footwear/cotton-slips" },
+            { title: "Vegan Piñatex Boots", link: "/sub-category/footwear/pinatex-boots" },
         ]
     },
 ];
+
 const paymentSecure = [
     {
-        title:'Secure Payment',
-        description:"We prioritize the security of your payment information. We understand the importance of ensuring that every transaction you make with us is safe and protected. That's why we have implemented robust security measures to safeguard your payment details and provide you with peace of mind throughout your shopping experience.",
-        imgLink:'securepayment.jpg',
-        imgAlt:'',
+        title: 'Ethical & Secure Checkout',
+        description: "We protect your transactions with high-grade 256-bit SSL encryption. We also partner exclusively with payment processors that maintain net-zero carbon operations.",
+        imgLink: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80',
+        imgAlt: 'Secure Payment',
     },
     {
-        title:'Cutting-Edge Encryption Technology',
-        description:"We utilize cutting-edge encryption technology to protect your sensitive payment information. Our secure sockets layer (SSL) encryption ensures that all data transmitted between your browser and our servers remains encrypted and confidential. This means that your credit card details, personal information, and transaction data are shielded from unauthorized access by third parties.",
-        imgLink:'securepayment-1.jpg',
-        imgAlt:'',
+        title: 'Bank-Grade SSL Encryption',
+        description: "All payment information is transmitted through authenticated SSL channels so your sensitive credit card and banking details are encrypted and safe.",
+        imgLink: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80',
+        imgAlt: 'Encryption',
     },
     {
-        title:'PCI Compliance',
-        description:"We are fully compliant with Payment Card Industry Data Security Standard (PCI DSS) requirements. This industry-standard framework sets forth stringent guidelines for securely handling credit card information during payment transactions. By adhering to PCI DSS standards, we maintain a secure environment for processing payment information, reducing the risk of data breaches and fraud.",
-        imgLink:'securepayment-2.jpg',
-        imgAlt:'',
+        title: 'Full PCI DSS Compliance',
+        description: "We strictly adhere to Level 1 PCI DSS standards to ensure payment card data is processed under the highest verified security controls.",
+        imgLink: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=80',
+        imgAlt: 'Compliance',
     },
     {
-        title:'Trusted Payment Partners',
-        description:"We partner with trusted payment service providers that adhere to the highest security standards in the industry. Whether you choose to pay by credit card, debit card, or alternative payment methods, rest assured that your transaction is processed securely and efficiently.",
-        imgLink:'securepayment-3.jpg',
-        imgAlt:'',
-    },
-    {
-        title:'Continuous Monitoring and Assessment',
-        description:"Our dedicated security team continuously monitors and assesses our payment systems to identify and mitigate any potential vulnerabilities or threats. We stay vigilant against emerging security risks and implement proactive measures to ensure the ongoing security of your payment information.",
-        imgLink:'securepayment-4.jpg',
-        imgAlt:'',
-    },
-    {
-        title:'Your Peace of Mind is Our Priority',
-        description:"We are committed to providing you with a seamless and secure payment experience. Your peace of mind is our top priority, and we spare no effort in upholding the highest standards of security to protect your valuable information. Shop with confidence knowing that your payment details are in safe hands.",
-        imgLink:'securepayment-5.jpg',
-        imgAlt:'',
-    },
-]
-const aboutUS= {
-    section1:[
-        {
-            title:"About Us",
-            description:"Welcome to [Your E-commerce Site Name], your ultimate destination for all things [your niche or industry]. Founded [year], we are passionate about delivering exceptional products and unparalleled shopping experiences to our customers worldwide.",
-            imgLink:"about.jpg",
-            imgAlt:""
-        },
-        {
-            title:"Our Story",
-            description:"At [Your E-commerce Site Name], our journey began with a simple yet powerful vision: to redefine the online shopping experience. What started as a small venture has grown into a thriving e-commerce platform, serving customers across the globe with a diverse range of high-quality products.",
-            imgLink:"about-1.jpg",
-            imgAlt:""
-        },
-        {
-            title:"Our Mission",
-            description:"Our mission is to empower individuals and communities by providing access to top-notch products that enhance their lives. We strive to create a seamless and enjoyable shopping environment where customers can discover new trends, find their favorite brands, and make informed purchasing decisions.",
-            imgLink:"about-2.jpg",
-            imgAlt:""
-        },
-        {
-            title:"What Sets Us Apart",
-            description:"What sets us apart is our unwavering commitment to excellence in every aspect of our business. From curating the finest selection of products to ensuring prompt and reliable delivery, we go above and beyond to exceed our customers' expectations.",
-            imgLink:"about-3.jpg",
-            imgAlt:""
-        }
+        title: 'Transparent Pricing Guarantee',
+        description: "No hidden environmental surcharges or surprise fees. Carbon offset calculations and sustainable packaging are built into our promise.",
+        imgLink: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80',
+        imgAlt: 'Transparency',
+    }
+];
 
+const aboutUS = {
+    section1: [
+        {
+            title: "About EcoBloom",
+            description: "EcoBloom was born from a simple belief: daily shopping should regenerate the planet rather than deplete it. We carefully curate products that replace disposable plastics and fast fashion with long-lasting, ethical, and circular alternatives.",
+            imgLink: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+            imgAlt: "EcoBloom Story"
+        },
+        {
+            title: "Our Circular Philosophy",
+            description: "Every item in our catalog is vetted for natural materials, ethical labor conditions, low water usage, and biodegradable or infinitely recyclable end-of-life cycles.",
+            imgLink: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=800&q=80",
+            imgAlt: "Circular Philosophy"
+        },
+        {
+            title: "Our Reforestation Pledge",
+            description: "Through our 1% For The Planet membership, each purchase directly funds verified reforestation and plastic-intercept cleanup initiatives around the world.",
+            imgLink: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80",
+            imgAlt: "Reforestation Pledge"
+        },
+        {
+            title: "Radical Transparency",
+            description: "We introduced our standardized Eco Score (0-100) so you know exactly how each product performs in materials, durability, packaging, and carbon footprint.",
+            imgLink: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80",
+            imgAlt: "Radical Transparency"
+        }
     ],
-    section2:{
-        title:"Our Values",
-        imgLink:"about-5.jpg",
-        imgAlt:"",
-        listPoints:[
+    section2: {
+        title: "Our Core Environmental Values",
+        imgLink: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80",
+        imgAlt: "Environmental Values",
+        listPoints: [
             {
-                title:"Customer Satisfaction",
-                description:"Your satisfaction is our top priority. We are dedicated to providing exceptional customer service and personalized support to ensure a smooth and enjoyable shopping experience."
+                title: "Zero Single-Use Plastics",
+                description: "100% plastic-free packaging, paper tape, and compostable protective padding on every single order."
             },
             {
-                title:"Quality Assurance",
-                description:"We stand behind the quality and authenticity of every product we offer. Each item undergoes rigorous quality control checks to meet our stringent standards of excellence."
+                title: "Certified Organic & Regenerative",
+                description: "GOTS-certified organic cotton, FSC-certified reclaimed wood, and wildcrafted organic botanicals."
             },
             {
-                title:"Innovation",
-                description:"We embrace innovation and continuously seek new ways to enhance our platform and elevate the shopping experience for our customers."
+                title: "Ethical Fair-Trade Sourcing",
+                description: "We ensure living wages, safe working conditions, and respect for artisan heritage."
             },
             {
-                title:"Sustainability",
-                description:"We are committed to promoting sustainability and ethical practices throughout our supply chain. We prioritize eco-friendly products and strive to minimize our environmental footprint."
+                title: "Circular Product Lifecycle",
+                description: "Designed for longevity, repairability, and responsible composting or recycling."
             }
-        ],
+        ]
     },
-    section3:{
-        title:"Get in Touch",
-        description:[
-            "We value transparency and open communication with our customers. If you have any questions, feedback, or inquiries, we encourage you to reach out to our dedicated customer support team. We are here to assist you every step of the way.",
-            "Thank you for choosing [Your E-commerce Site Name]. We look forward to serving you and helping you discover the joy of shopping online."
+    section3: {
+        title: "Join the Eco Movement",
+        description: [
+            "Every conscious swap matters. Whether replacing cling wrap with beeswax sheets, synthetic shoes with cork soles, or plastic shampoo bottles with solid bars, your choices drive collective change.",
+            "Thank you for choosing EcoBloom. Together, we are building a greener, cleaner, and more vibrant tomorrow."
         ]
     }
-}
+};
+
 const availableCategories = [
     {
         title: 'fashion',
-        banners:["https://i.pinimg.com/736x/71/c0/90/71c090c1ee401a79f7b84c086fa04063.jpg","https://www.apetogentleman.com/wp-content/uploads/2022/05/FALL-WINTER-TRENDS.jpg","https://assets.vogue.com/photos/614a24383c6a255bbac856d8/master/w_2560%2Cc_limit/00_story.jpg"],
+        banners: [
+            "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1600&q=80"
+        ],
         subcategories: [
-            { title: 'T-Shirt', link: '/TShirt' },
-            { title: 'Shirts', link: '/shirts' },
-            { title: 'Shorts & Jeans', link: '/shorts-&-jeans' },
-            { title: 'Jacket', link: '/jacket' },
-            { title: 'Dress & Frock', link: '/dress-&-frock' },
-            { title: 'Innerwear', link: '/innerwear' },
-            { title: 'Hosiery', link: '/hosiery' },
+            { title: 'Organic Cotton Basics', link: '/organic-cotton' },
+            { title: 'Hemp & Linen Casuals', link: '/hemp-linen' },
+            { title: 'Recycled Fleece', link: '/recycled-fleece' },
+            { title: 'Bamboo Loungewear', link: '/bamboo-wear' },
+            { title: 'Beeswax Wraps', link: '/beeswax-wraps' },
+            { title: 'Bamboo Utensils', link: '/bamboo-kitchenware' },
+            { title: 'Organic Canvas Totes', link: '/canvas-totes' }
         ]
     },
     {
         title: 'footwear',
-        banners:["https://www.india.com/wp-content/uploads/2017/08/footwear.jpg","https://images.moneycontrol.com/static-mcnews/2020/04/footwear-28042020.jpg?impolicy=website&width=1600&height=900","https://www.airwavesf.com/wp-content/uploads/2022/06/79589-645-collecting-sneakers-and-photography-a-collection-of-limited-editions-and-exclusive-models-combination_t20_Op1ydp.jpg"],
+        banners: [
+            "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1600&q=80"
+        ],
         subcategories: [
-            { title: 'Sport', link: '/sport' },
-            { title: 'Formal', link: '/formal' },
-            { title: 'Boots', link: '/boots' },
-            { title: 'Casual', link: '/casual' },
-            { title: 'Cowboy Shoes', link: '/cowboy-shoes' },
-            { title: 'Safety Shoes', link: '/safety-shoes' },
-            { title: 'Party Wear Shoes', link: '/party-wear-shoes' },
-            { title: 'Branded', link: '/branded-footwear' },
-            { title: 'Firstcopy', link: '/firstcopy' },
-            { title: 'Long Shoes', link: '/long-shoes' },
+            { title: 'Cork Sole Walkers', link: '/cork-walkers' },
+            { title: 'Natural Rubber Slides', link: '/natural-rubber' },
+            { title: 'Recycled Ocean Canvas', link: '/recycled-canvas' },
+            { title: 'Organic Cotton Slips', link: '/cotton-slips' },
+            { title: 'Vegan Piñatex Boots', link: '/pinatex-boots' }
         ]
     },
     {
         title: 'jewellery',
-        banners:["https://www.mygoldguide.in/sites/default/files/Indo-wester_%20look_Cocktail_parties_01.jpg","https://kiyajewellery.in/cdn/shop/files/351494422_600067025526915_1828569725887026248_n_copy.jpg?v=1713783276&width=3840","https://www.truesilver.co.in/cdn/shop/articles/6_Stunning_Jewellery_for_Western_Wear.jpg?v=1695726468"],
+        banners: [
+            "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1611591475806-904005cf4b76?auto=format&fit=crop&w=1600&q=80"
+        ],
         subcategories: [
-            { title: 'Necklace', link: '/necklace' },
-            { title: 'Earrings', link: '/earrings' },
-            { title: 'Couple Rings', link: '/couple-rings' },
-            { title: 'Pendants', link: '/pendants' },
-            { title: 'Crystal', link: '/crystal' },
-            { title: 'Bangles', link: '/bangles' },
-            { title: 'Bracelets', link: '/bracelets' },
-            { title: 'Nosepin', link: '/nosepin' },
-            { title: 'Chain', link: '/chain' },
+            { title: 'Recycled Silver Pendants', link: '/recycled-silver' },
+            { title: 'Tagua Nut Earrings', link: '/tagua-earrings' },
+            { title: 'Reclaimed Wood Bracelets', link: '/wood-bracelets' },
+            { title: 'Ocean Sea Glass Rings', link: '/sea-glass' }
         ]
     },
     {
         title: 'cosmetics',
-        banners:["https://www.cosmeticsdesign.com/var/wrbm_gb_food_pharma/storage/images/media/images/news-photogalleries/786041/color-cosmetics/15607895-1-eng-GB/Color-cosmetics.jpg","https://img.etimg.com/thumb/width-1600,height-900,imgsize-55008,resizemode-75,msid-102292994/industry/cons-products/fashion-/-cosmetics-/-jewellery/indians-spent-over-rs-5000-cr-on-cosmetics-sector-may-gain-as-more-women-go-to-work-study.jpg","https://lh3.googleusercontent.com/proxy/9nWZ4LOknTOPQgXzTZ0Q9VT6_WzLd8dmLgIkfZYiQgWuuOWXc7Gk6cfdzfjdUpbpiwPD6nIdy6jlIas_EUBibRUWWwxlvZxrNMJmFcSqdF1YB943"],
+        banners: [
+            "https://images.unsplash.com/photo-1608248597359-07b973f55403?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1600&q=80"
+        ],
         subcategories: [
-            { title: 'Shampoo', link: '/shampoo' },
-            { title: 'Bodywash', link: '/bodywash' },
-            { title: 'Facewash', link: '/facewash' },
-            { title: 'Makeup Kit', link: '/makeup-kit' },
-            { title: 'Liner', link: '/liner' },
-            { title: 'Lipstick', link: '/lipstick' },
-            { title: 'Perfume', link: '/perfume' },
-            { title: 'Body Soap', link: '/body-soap' },
-            { title: 'Scrub', link: '/scrub' },
-            { title: 'Hair Gel', link: '/hair-gel' },
-            { title: 'Hair Colors', link: '/hair-colors' },
-            { title: 'Hair Dye', link: '/hair-dye' },
-            { title: 'Sunscreen', link: '/sunscreen' },
-            { title: 'Skin Lotion', link: '/skin-lotion' },
+            { title: 'Zero-Waste Shampoo Bars', link: '/shampoo-bars' },
+            { title: 'Cold-Pressed Herbal Soaps', link: '/botanical-soap' },
+            { title: 'Mineral Reef Sunscreen', link: '/mineral-sunscreen' },
+            { title: 'Soy Wax Candles', link: '/soy-candles' },
+            { title: 'Bamboo Toothbrushes', link: '/bamboo-brushes' }
         ]
     },
     {
         title: 'electronics',
-        banners:["https://i.pinimg.com/originals/d2/b9/40/d2b940959caadeaf591041c70ab7a0ab.png","https://d1csarkz8obe9u.cloudfront.net/posterpreviews/gaming-computer-banner-sale-design-template-4eee9f783ef62e0f7122e9ae7828bec1_screen.jpg?ts=1659604125","https://d1csarkz8obe9u.cloudfront.net/posterpreviews/computer-accessories-template-design-129534fcc8ab7b353cd7627bac2ec34e_screen.jpg?ts=1659516861"],
+        banners: [
+            "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80",
+            "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80"
+        ],
         subcategories: [
-            { title: 'Laptops', link: '/laptop' },
-            { title: 'Tablets', link: '/tablet' },
-            { title: 'Headphones', link: '/headphone' },
-            { title: 'Cameras', link: '/cameras' },
-            { title: 'Smartwatches', link: '/smart-watch' },
-            { title: 'Smart TV', link: '/smart-TV' },
+            { title: 'Solar Power Banks', link: '/solar-chargers' },
+            { title: 'Bamboo Keyboards', link: '/bamboo-keyboards' },
+            { title: 'Compostable Phone Cases', link: '/compostable-cases' },
+            { title: 'Reclaimed Wood Solar Watches', link: '/wood-watches' }
         ]
-    },
+    }
 ];
+
 const loginFeatures = [
     {
-        title: 'Track Your Orders',
-        description: 'Keep tabs on your purchases with real-time order tracking and updates.',
+        title: 'Track Carbon-Neutral Deliveries',
+        description: 'Real-time carbon offset tracking and order updates for each parcel.',
         iconType: 'search',
     },
     {
-        title: 'Personalized Recommendations',
-        description: 'Log in to receive product suggestions tailored to your shopping preferences.',
+        title: 'Tailored Eco Recommendations',
+        description: 'Discover zero-waste swaps specifically aligned with your lifestyle.',
         iconType: 'star',
     },
     {
-        title: 'Wishlist Management',
-        description: 'Save your favorite items to your wishlist for quick and easy future purchases.',
+        title: 'Save Sustainable Favourites',
+        description: 'Bookmark organic essentials to your mindful wishlist for low-waste shopping.',
         iconType: 'heart',
     },
     {
-        title: 'Secure Checkout',
-        description: 'Enjoy a fast, secure, and hassle-free checkout process every time you shop with us.',
+        title: 'Encrypted & Ethical Checkout',
+        description: 'Secure, green-powered payment processing with instant eco-point rewards.',
         iconType: 'lock',
     },
 ];
+
 const serviceFeatures = [
     {
-        title: 'Worldwide Delivery',
-        description: "Enjoy our comprehensive global shipping services, designed to bring your favorite products right to your doorstep, no matter where you are. We partner with top logistics companies to ensure your order reaches you safely and promptly, providing you with a seamless shopping experience from anywhere in the world.",
-        imgLink: 'https://cdn.pixabay.com/photo/2014/04/03/11/55/globe-312563_640.png',
-        imgAlt: 'Globe with delivery arrows',
+        title: '100% Carbon-Neutral Shipping',
+        description: "We measure the logistics footprint of every order and invest directly in verified native woodland restoration and ocean cleanups to offset all delivery emissions completely.",
+        imgLink: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80',
+        imgAlt: 'Carbon Neutral Delivery',
     },
     {
-        title: 'Free Shipping on Orders Over $100',
-        description: "Shop to your heart's content and take advantage of our special offer: free shipping on all orders over $100. Whether you're buying gifts for loved ones or treating yourself, you'll save on shipping costs, making your shopping experience even more enjoyable. Spend more, save more with us!",
-        imgLink: 'https://img.freepik.com/premium-vector/delivery-order-illustration-modern-flat-style_529804-22.jpg',
-        imgAlt: 'Shipping box with dollar sign',
+        title: 'Free Shipping Over $45',
+        description: "Enjoy mindful shopping with free plastic-free delivery on orders above $45. We bundle items responsibly to minimize transport packaging and fuel emissions.",
+        imgLink: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80',
+        imgAlt: 'Free Shipping',
     },
     {
-        title: 'Next Day Delivery',
-        description: "Need your items in a hurry? With our next day delivery service, you can receive your order the very next day! This service is available for orders in tier-1 cities, ensuring that you never have to wait long for your essential items. Fast, reliable, and convenient delivery right to your door.",
-        imgLink: 'https://cdn-icons-png.freepik.com/512/1254/1254262.png',
-        imgAlt: 'Clock with delivery truck',
+        title: 'Guaranteed Plastic-Free Mailers',
+        description: "Every shipment arrives in 100% post-consumer recycled cardboard and compostable plant-based mailers with water-activated paper tape.",
+        imgLink: 'https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=600&q=80',
+        imgAlt: 'Plastic Free Packaging',
     },
     {
-        title: 'Next Day Delivery for Tier-1 Cities',
-        description: "Our next day delivery service is exclusively available for customers in tier-1 cities. This means you can enjoy the speed and convenience of receiving your orders within 24 hours, perfect for those last-minute needs or urgent purchases. Experience the ultimate in fast delivery with our premium service.",
-        imgLink: 'https://img.freepik.com/free-vector/gradient-international-trade_23-2149150716.jpg',
-        imgAlt: 'Map highlighting tier-1 cities',
+        title: 'Circular Return & Repair Service',
+        description: "Return gently worn or damaged items under our circular program to be repaired, rehomed, or recycled into new fibers in exchange for store credit.",
+        imgLink: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80',
+        imgAlt: 'Circular Return',
     },
     {
-        title: 'Best Online Support',
-        description: "Our customer support team is dedicated to providing you with the best service possible. Available from 8AM to 11PM, our knowledgeable and friendly representatives are here to assist you with any inquiries or issues you may have. We're committed to ensuring your shopping experience is smooth and enjoyable.",
-        imgLink: 'https://img.freepik.com/free-vector/hand-drawn-flat-design-omnichannel-illustration_23-2149360245.jpg?size=626&ext=jpg&ga=GA1.1.1141335507.1718496000&semt=ais_user',
-        imgAlt: 'Headset with customer service icon',
-    },
-    {
-        title: 'Easy & Free Return',
-        description: "Shop with confidence knowing that our easy and free return policy has you covered. If you're not completely satisfied with your purchase, you can return it hassle-free. We aim to make the return process as straightforward as possible, giving you peace of mind with every order.",
-        imgLink: 'https://atlanticcourier.net/static/images/testimonials-atlantic-courier.jpg',
-        imgAlt: 'Return package with arrow',
-    },
-    {
-        title: '30% Money Back Guarantee',
-        description: "Enjoy added assurance with our 30% money back guarantee on orders over $100. If you're not fully satisfied with your purchase, we'll refund 30% of your order value. This guarantee underscores our commitment to your satisfaction and ensures that you can shop with complete confidence.",
-        imgLink: 'https://cdni.iconscout.com/illustration/premium/thumb/cashback-3465499-2912113.png?f=webp',
-        imgAlt: 'Money back symbol',
-    },
+        title: 'Dedicated Eco Advisory Support',
+        description: "Our knowledgeable sustainability advisors are here daily to help you understand product materials, certifications, and zero-waste disposal guidelines.",
+        imgLink: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
+        imgAlt: 'Eco Support',
+    }
 ];
-const allCategories = [{name:"Men's",link:'/categories/MEN'},{name:"Women's",link:'/categories/WOMEN'},{name:'Cosmetics',link:'/categories/Cosmetics'},{name:'Electronics',link:'/categories/electronics'},{name:'Perfume',link:'/categories/perfume'},{name:'Jewellery',link:'/categories/jewellery'},{name:'Footwear',link:'/categories/footwear'},{name:'Fashion',link:'/categories/fashion'}]
-export {topCat, allCategories, serviceFeatures, loginFeatures,  navBtns,  aboutUS, availableCategories, paymentSecure, leftStatus, categoryDropDown,  footerCategories, footerSections, featuresSec, currentEvent, testimonial};
+
+const allCategories = [
+    { name: "Eco Apparel", link: '/categories/fashion' },
+    { name: "Sustainable Footwear", link: '/categories/footwear' },
+    { name: "Botanical Care", link: '/categories/cosmetics' },
+    { name: "Clean Tech & Solar", link: '/categories/electronics' },
+    { name: "Ethical Jewelry", link: '/categories/jewellery' },
+    { name: "Natural Aromas", link: '/categories/perfume' },
+    { name: "Men's Eco Basics", link: '/categories/MEN' },
+    { name: "Women's Eco Wear", link: '/categories/WOMEN' }
+];
+
+// Rich Fallback Eco-Products (Displayed when database is empty or offline)
+const fallbackEcoProducts = [
+    {
+        productid: 101,
+        title: "GOTS Organic Cotton Everyday Tee",
+        category: "Organic Cotton Basics",
+        maincategory: "fashion",
+        price: "38.00",
+        discount: "29.00",
+        stars: 5,
+        isnew: true,
+        issale: true,
+        isdiscount: true,
+        colors: [
+            { colorid: 1, name: "Sage Green", colorname: "Sage Green", colorclass: "bg-emerald-700" },
+            { colorid: 2, name: "Natural Oat", colorname: "Natural Oat", colorclass: "bg-amber-100" }
+        ],
+        sizes: [
+            { sizeid: 1, name: "S", sizename: "S", instock: true },
+            { sizeid: 2, name: "M", sizename: "M", instock: true },
+            { sizeid: 3, name: "L", sizename: "L", instock: true }
+        ],
+        reviewCount: 42,
+        images: {
+            imageid: 101,
+            imglink: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Organic Cotton T-Shirt"
+        },
+        ecoScore: 96,
+        ecoRating: "Excellent",
+        ecoSummary: "100% GOTS certified organic cotton, dyed with closed-loop water treatment.",
+        ecoFactors: ["Zero pesticides", "Non-toxic botanical dyes", "100% biodegradable fiber"],
+        sustainabilityTags: ["Organic", "Fair-Trade", "Compostable"]
+    },
+    {
+        productid: 102,
+        title: "Natural Cork Sole Everyday Walkers",
+        category: "Cork Sole Walkers",
+        maincategory: "footwear",
+        price: "98.00",
+        discount: "79.00",
+        stars: 5,
+        isnew: true,
+        issale: false,
+        isdiscount: true,
+        colors: [
+            { colorid: 3, name: "Raw Cork", colorname: "Raw Cork", colorclass: "bg-amber-600" },
+            { colorid: 4, name: "Forest Olive", colorname: "Forest Olive", colorclass: "bg-stone-800" }
+        ],
+        sizes: [
+            { sizeid: 4, name: "38", sizename: "38", instock: true },
+            { sizeid: 5, name: "40", sizename: "40", instock: true },
+            { sizeid: 6, name: "42", sizename: "42", instock: true }
+        ],
+        reviewCount: 29,
+        images: {
+            imageid: 102,
+            imglink: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Natural Cork Sole Shoes"
+        },
+        ecoScore: 94,
+        ecoRating: "Excellent",
+        ecoSummary: "Harvested from regeneratively stripped Portuguese oak bark with natural latex footbed.",
+        ecoFactors: ["Trees unharmed during harvest", "Natural rubber outsole", "Plastic-free construction"],
+        sustainabilityTags: ["Cork", "Low-Carbon", "Renewable"]
+    },
+    {
+        productid: 103,
+        title: "Solar-Powered Sandalwood Minimalist Watch",
+        category: "Reclaimed Wood Solar Watches",
+        maincategory: "electronics",
+        price: "140.00",
+        discount: "115.00",
+        stars: 5,
+        isnew: false,
+        issale: true,
+        isdiscount: true,
+        colors: [
+            { colorid: 5, name: "Natural Sandalwood", colorname: "Natural Sandalwood", colorclass: "bg-amber-800" }
+        ],
+        sizes: [
+            { sizeid: 7, name: "40mm", sizename: "40mm", instock: true }
+        ],
+        reviewCount: 38,
+        images: {
+            imageid: 103,
+            imglink: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Solar Powered Wood Watch"
+        },
+        ecoScore: 91,
+        ecoRating: "Excellent",
+        ecoSummary: "Powered by natural sunlight with no disposable batteries. Reclaimed furniture offcut body.",
+        ecoFactors: ["Zero battery waste", "FSC reclaimed timber", "Organic cork strap"],
+        sustainabilityTags: ["Solar-Powered", "Reclaimed Wood", "Zero-Battery"]
+    },
+    {
+        productid: 104,
+        title: "Zero-Waste Organic Beeswax Food Wraps (Pack of 4)",
+        category: "Reusable Beeswax Wraps",
+        maincategory: "fashion",
+        price: "24.00",
+        discount: "18.00",
+        stars: 5,
+        isnew: true,
+        issale: true,
+        isdiscount: true,
+        colors: [
+            { colorid: 6, name: "Botanical Print", colorname: "Botanical Print", colorclass: "bg-yellow-200" }
+        ],
+        sizes: [
+            { sizeid: 8, name: "Multi-Pack", sizename: "Multi-Pack", instock: true }
+        ],
+        reviewCount: 56,
+        images: {
+            imageid: 104,
+            imglink: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Organic Beeswax Food Wraps"
+        },
+        ecoScore: 98,
+        ecoRating: "Excellent",
+        ecoSummary: "Eliminates single-use plastic wrap completely. Washable and naturally antibacterial.",
+        ecoFactors: ["Replaces 200 plastic rolls", "Ethical beeswax & tree resin", "100% backyard compostable"],
+        sustainabilityTags: ["Zero-Waste", "Plastic-Free", "Compostable"]
+    },
+    {
+        productid: 105,
+        title: "Cold-Pressed Solid Shampoo & Conditioner Bar",
+        category: "Zero-Waste Shampoo Bars",
+        maincategory: "cosmetics",
+        price: "18.00",
+        discount: "14.00",
+        stars: 5,
+        isnew: false,
+        issale: true,
+        isdiscount: true,
+        colors: [
+            { colorid: 7, name: "Rosemary Mint", colorname: "Rosemary Mint", colorclass: "bg-emerald-300" }
+        ],
+        sizes: [
+            { sizeid: 9, name: "100g Bar", sizename: "100g Bar", instock: true }
+        ],
+        reviewCount: 67,
+        images: {
+            imageid: 105,
+            imglink: "https://images.unsplash.com/photo-1608248597359-07b973f55403?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Solid Shampoo Bar"
+        },
+        ecoScore: 97,
+        ecoRating: "Excellent",
+        ecoSummary: "Saves 3 plastic shampoo bottles per bar. Enriched with wild argan and jojoba oils.",
+        ecoFactors: ["Sulfate & palm-oil free", "Waterless concentrated formula", "Paper box packaging"],
+        sustainabilityTags: ["Waterless", "Palm-Oil Free", "Plastic-Free"]
+    },
+    {
+        productid: 106,
+        title: "Solar 20,000mAh Clean Energy Power Bank",
+        category: "Solar Power Banks",
+        maincategory: "electronics",
+        price: "65.00",
+        discount: "49.00",
+        stars: 5,
+        isnew: true,
+        issale: true,
+        isdiscount: true,
+        colors: [
+            { colorid: 8, name: "Forest Moss", colorname: "Forest Moss", colorclass: "bg-emerald-900" }
+        ],
+        sizes: [
+            { sizeid: 10, name: "Standard", sizename: "Standard", instock: true }
+        ],
+        reviewCount: 34,
+        images: {
+            imageid: 106,
+            imglink: "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Solar Power Bank"
+        },
+        ecoScore: 89,
+        ecoRating: "Excellent",
+        ecoSummary: "Dual monocrystalline solar panels with casing molded from post-consumer recycled plastic.",
+        ecoFactors: ["Clean off-grid charging", "85% recycled casing", "High longevity LiFePO4 cells"],
+        sustainabilityTags: ["Solar-Power", "Recycled-Body", "Long-Life"]
+    },
+    {
+        productid: 107,
+        title: "Recycled Ocean Plastic Canvas Sneakers",
+        category: "Recycled Ocean Canvas",
+        maincategory: "footwear",
+        price: "85.00",
+        discount: "68.00",
+        stars: 4,
+        isnew: false,
+        issale: false,
+        isdiscount: true,
+        colors: [
+            { colorid: 9, name: "Ocean White", colorname: "Ocean White", colorclass: "bg-slate-100" }
+        ],
+        sizes: [
+            { sizeid: 11, name: "40", sizename: "40", instock: true },
+            { sizeid: 12, name: "42", sizename: "42", instock: true }
+        ],
+        reviewCount: 22,
+        images: {
+            imageid: 107,
+            imglink: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Recycled Ocean Sneakers"
+        },
+        ecoScore: 92,
+        ecoRating: "Excellent",
+        ecoSummary: "Upper woven from 12 intercepted ocean-bound plastic bottles. Wild natural rubber sole.",
+        ecoFactors: ["Intercepts ocean waste", "Algae foam insole", "Non-toxic water-based adhesive"],
+        sustainabilityTags: ["Ocean-Plastic", "Algae-Foam", "Circularity"]
+    },
+    {
+        productid: 108,
+        title: "Handmade Reclaimed Silver Leaf Pendant",
+        category: "Recycled Silver Pendants",
+        maincategory: "jewellery",
+        price: "72.00",
+        discount: "58.00",
+        stars: 5,
+        isnew: true,
+        issale: false,
+        isdiscount: true,
+        colors: [
+            { colorid: 10, name: "Polished Silver", colorname: "Polished Silver", colorclass: "bg-gray-300" }
+        ],
+        sizes: [
+            { sizeid: 13, name: "One Size", sizename: "One Size", instock: true }
+        ],
+        reviewCount: 19,
+        images: {
+            imageid: 108,
+            imglink: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Recycled Silver Pendant"
+        },
+        ecoScore: 93,
+        ecoRating: "Excellent",
+        ecoSummary: "Cast from 100% recycled eco-silver diverted from end-of-life electronics. Fairmined certified.",
+        ecoFactors: ["Zero destructive mining", "Conflict-free origin", "Recycled gift packaging"],
+        sustainabilityTags: ["Eco-Silver", "Conflict-Free", "Fair-Trade"]
+    },
+    {
+        productid: 109,
+        title: "Pure Hemp & Linen Relaxed Trousers",
+        category: "Hemp & Linen Casuals",
+        maincategory: "fashion",
+        price: "82.00",
+        discount: "64.00",
+        stars: 5,
+        isnew: false,
+        issale: true,
+        isdiscount: true,
+        colors: [
+            { colorid: 11, name: "Earthy Clay", colorname: "Earthy Clay", colorclass: "bg-stone-500" }
+        ],
+        sizes: [
+            { sizeid: 14, name: "M", sizename: "M", instock: true },
+            { sizeid: 15, name: "L", sizename: "L", instock: true }
+        ],
+        reviewCount: 31,
+        images: {
+            imageid: 109,
+            imglink: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Hemp Linen Trousers"
+        },
+        ecoScore: 95,
+        ecoRating: "Excellent",
+        ecoSummary: "Naturally breathable hemp requires 75% less water than conventional cotton and zero synthetic fertilizers.",
+        ecoFactors: ["Soil regenerative crop", "Carbon negative crop yield", "Coconut shell buttons"],
+        sustainabilityTags: ["Hemp", "Low-Water", "Natural-Buttons"]
+    },
+    {
+        productid: 110,
+        title: "Non-Nano Reef-Safe Zinc Sunscreen SPF 50",
+        category: "Mineral Reef Sunscreen",
+        maincategory: "cosmetics",
+        price: "26.00",
+        discount: "21.00",
+        stars: 5,
+        isnew: true,
+        issale: false,
+        isdiscount: true,
+        colors: [
+            { colorid: 12, name: "Clear Mineral", colorname: "Clear Mineral", colorclass: "bg-white" }
+        ],
+        sizes: [
+            { sizeid: 16, name: "150ml Aluminum Tin", sizename: "150ml Aluminum Tin", instock: true }
+        ],
+        reviewCount: 48,
+        images: {
+            imageid: 110,
+            imglink: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Reef Safe Mineral Sunscreen"
+        },
+        ecoScore: 98,
+        ecoRating: "Excellent",
+        ecoSummary: "100% non-nano zinc oxide formula safe for coral reefs and ocean wildlife. Plastic-free aluminum tin.",
+        ecoFactors: ["Safe for marine ecosystems", "Infinitely recyclable tin", "Organic aloe & jojoba base"],
+        sustainabilityTags: ["Reef-Safe", "Non-Nano", "Zero-Plastic"]
+    },
+    {
+        productid: 111,
+        title: "Artisan Bamboo Mechanical Keyboard",
+        category: "Bamboo Keyboards",
+        maincategory: "electronics",
+        price: "110.00",
+        discount: "89.00",
+        stars: 5,
+        isnew: false,
+        issale: true,
+        isdiscount: true,
+        colors: [
+            { colorid: 13, name: "Caramel Bamboo", colorname: "Caramel Bamboo", colorclass: "bg-amber-700" }
+        ],
+        sizes: [
+            { sizeid: 17, name: "Compact 75%", sizename: "Compact 75%", instock: true }
+        ],
+        reviewCount: 39,
+        images: {
+            imageid: 111,
+            imglink: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Bamboo Mechanical Keyboard"
+        },
+        ecoScore: 90,
+        ecoRating: "Excellent",
+        ecoSummary: "Solid CNC milled FSC bamboo housing replaces plastic casing. Hot-swappable switches for easy repair.",
+        ecoFactors: ["Rapidly renewable bamboo", "Modular repairable design", "Braided recycled cable"],
+        sustainabilityTags: ["Bamboo", "Repairable", "Plastic-Reduced"]
+    },
+    {
+        productid: 112,
+        title: "Heavyweight Organic Canvas Everyday Tote",
+        category: "Organic Canvas Totes",
+        maincategory: "fashion",
+        price: "28.00",
+        discount: "22.00",
+        stars: 5,
+        isnew: true,
+        issale: false,
+        isdiscount: true,
+        colors: [
+            { colorid: 14, name: "Raw Cotton", colorname: "Raw Cotton", colorclass: "bg-stone-200" }
+        ],
+        sizes: [
+            { sizeid: 18, name: "20L", sizename: "20L", instock: true }
+        ],
+        reviewCount: 52,
+        images: {
+            imageid: 112,
+            imglink: "https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=600&q=80",
+            imgalt: "Organic Canvas Tote"
+        },
+        ecoScore: 97,
+        ecoRating: "Excellent",
+        ecoSummary: "Reinforced 16oz unbleached organic canvas designed to last 10+ years of daily grocery shopping.",
+        ecoFactors: ["Zero chlorine bleaching", "Replaces 1,000 plastic bags", "Reinforced box stitching"],
+        sustainabilityTags: ["Zero-Waste", "Unbleached", "Ultra-Durable"]
+    }
+];
+
+const fallbackEcoBanners = [
+    {
+        bannerid: 1,
+        toptitle: "Regenerative Living",
+        middletitle: "Zero-Waste Home & Kitchen",
+        bottomtitle: "Mindful essentials starting at",
+        imglink: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1400&q=80",
+        startprice: 14,
+        buttontitle: "Shop Zero-Waste",
+        redirect_link: "/categories/fashion",
+        createdat: new Date(),
+        updatedat: new Date()
+    },
+    {
+        bannerid: 2,
+        toptitle: "Earth-Friendly Fiber",
+        middletitle: "Certified Organic Cotton & Hemp",
+        bottomtitle: "Low-water apparel starting at",
+        imglink: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1400&q=80",
+        startprice: 28,
+        buttontitle: "Explore Apparel",
+        redirect_link: "/categories/fashion",
+        createdat: new Date(),
+        updatedat: new Date()
+    },
+    {
+        bannerid: 3,
+        toptitle: "Clean Energy Tech",
+        middletitle: "Solar Chargers & Bamboo Accessories",
+        bottomtitle: "Off-grid green gadgets starting at",
+        imglink: "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=1400&q=80",
+        startprice: 22,
+        buttontitle: "Discover Clean Tech",
+        redirect_link: "/categories/electronics",
+        createdat: new Date(),
+        updatedat: new Date()
+    }
+];
+
+const fallbackEcoDeals = [
+    {
+        productid: 104,
+        title: "Zero-Waste Kitchen Starter Bundle (Wraps, Bamboo Utensils & Steel Straws)",
+        stars: 5,
+        description: "Everything needed to eliminate single-use kitchen plastics. Includes 4 organic beeswax wraps, 5-piece bamboo cutlery, and 2 stainless steel tumblers.",
+        price: 32,
+        discount: 48,
+        sold: 142,
+        available: 35,
+        rating: 4.9,
+        imglink: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+        imgalt: "Zero Waste Kitchen Bundle",
+        end_time: new Date(Date.now() + 86400000 * 3).toISOString()
+    }
+];
+
+const fallbackEcoArticles = [
+    {
+        article_id: 1,
+        category: "Zero-Waste Guide",
+        title: "10 Easy Swaps to Cut Household Plastic by 80% This Month",
+        imglink: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+        imgalt: "Zero Waste Kitchen",
+        author: "Dr. Maya Lindqvist",
+        published_date: "2026-03-15T09:00:00Z",
+        content: "Discover how simple shifts—from solid shampoo bars and beeswax wraps to reusable produce sacks—create an immediate and measurable drop in landfill waste without disrupting daily routines."
+    },
+    {
+        article_id: 2,
+        category: "Sustainable Fashion",
+        title: "Why Hemp and Organic Cotton are Transforming the Apparel Industry",
+        imglink: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=600&q=80",
+        imgalt: "Organic Cotton",
+        author: "Julian Chen",
+        published_date: "2026-03-20T14:30:00Z",
+        content: "Hemp produces up to three times more usable fiber per acre than cotton while enriching topsoil and requiring virtually no chemical pesticides. Here is how modern regenerative farming makes it luxurious."
+    },
+    {
+        article_id: 3,
+        category: "Clean Tech",
+        title: "How Portable Solar & Monocrystalline Cells Minimize Your Tech Footprint",
+        imglink: "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?auto=format&fit=crop&w=600&q=80",
+        imgalt: "Solar Gadgets",
+        author: "Amina Al-Mansoor",
+        published_date: "2026-03-28T11:00:00Z",
+        content: "Harvesting sunlight on your balcony or commute to charge everyday mobile devices helps curb phantom grid draw while teaching circular energy literacy."
+    }
+];
+
+export {
+    topCat,
+    allCategories,
+    serviceFeatures,
+    loginFeatures,
+    navBtns,
+    aboutUS,
+    availableCategories,
+    paymentSecure,
+    leftStatus,
+    categoryDropDown,
+    footerCategories,
+    footerSections,
+    featuresSec,
+    currentEvent,
+    testimonial,
+    fallbackEcoProducts,
+    fallbackEcoBanners,
+    fallbackEcoDeals,
+    fallbackEcoArticles
+};

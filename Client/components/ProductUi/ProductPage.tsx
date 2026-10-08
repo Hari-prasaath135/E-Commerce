@@ -13,6 +13,8 @@ import { cartAddHandler,wishlistAddHandler } from '@/app/api/itemLists'
 import { useApp } from '@/Helpers/AccountDialog'
 import ProductDialogs from './ProductDialogs'
 import Link from 'next/link'
+import EcoScore from './EcoScore'
+import { fallbackEcoProducts } from '@/app/data'
 // Interface for individual reviews
 interface Review {
   reviewid: number;
@@ -70,6 +72,11 @@ interface Product {
   colors: ProductColor[] | [];
   sizes: ProductSize[] | [];
   reviews: Review[] | [];
+  ecoScore?: number | null;
+  ecoRating?: string | null;
+  ecoSummary?: string | null;
+  ecoFactors?: string[];
+  sustainabilityTags?: string[];
 }
 const defaultData = {
   productid:1,
@@ -88,6 +95,11 @@ const defaultData = {
   colors: [],
   sizes: [],
   reviews: [],
+  ecoScore: null,
+  ecoRating: null,
+  ecoSummary: null,
+  ecoFactors: [],
+  sustainabilityTags: [],
 }
 const IDGenerator = ()=>{
   const ID = Math.round(Math.random() * 1000 * 1000 * 100);
@@ -142,16 +154,50 @@ const ProductPage = () => {
       
       switch (response.status) {
         case 200:
-        dataVar.current = response.data.data;
-        if(response.data.data != undefined) totalQuantity.current=response.data.data.stock;
-        setdataChecked(true);
-        break;
-        case 500:
-          found.current = false;
-          setdataChecked(true);
+          if (response.data?.data) {
+            dataVar.current = response.data.data;
+            if(response.data.data != undefined) totalQuantity.current=response.data.data.stock;
+            setdataChecked(true);
+            break;
+          }
+          // fall through if data is null/undefined
+        default:
+          const targetId = Number(params.productID);
+          const fallbackMatch = fallbackEcoProducts.find(p => p.productid === targetId) || fallbackEcoProducts[0];
+          if (fallbackMatch) {
+            dataVar.current = {
+              productid: fallbackMatch.productid,
+              title: fallbackMatch.title,
+              description: fallbackMatch.ecoSummary || "Sustainably crafted using certified materials, low-impact processes, and plastic-free packaging.",
+              stock: 50,
+              discountedprice: fallbackMatch.discount,
+              price: fallbackMatch.price,
+              stars: fallbackMatch.stars,
+              seller: "EcoBloom Verified Maker",
+              reviewcount: fallbackMatch.reviewCount,
+              categories: { subcategory: fallbackMatch.category, maincategory: fallbackMatch.maincategory },
+              imglink: fallbackMatch.images.imglink,
+              imgalt: fallbackMatch.images.imgalt,
+              imgcollection: [{ imageid: 1, imglink: fallbackMatch.images.imglink, imgalt: fallbackMatch.images.imgalt }],
+              colors: fallbackMatch.colors as any,
+              sizes: fallbackMatch.sizes as any,
+              reviews: [],
+              ecoScore: fallbackMatch.ecoScore,
+              ecoRating: fallbackMatch.ecoRating,
+              ecoSummary: fallbackMatch.ecoSummary,
+              ecoFactors: fallbackMatch.ecoFactors,
+              sustainabilityTags: fallbackMatch.sustainabilityTags
+            };
+            totalQuantity.current = 50;
+            found.current = true;
+            setdataChecked(true);
+          } else {
+            found.current = false;
+            setdataChecked(true);
+          }
           break;
-        }
       }
+    }
     async function setUpData(){
       if(data != undefined){
         data.colors.length > 0 && setSelectedColor(data.colors[0]);
@@ -243,7 +289,7 @@ const ProductPage = () => {
             </div>
             <div className='flex flex-col gap-5 border-[1px] py-10 px-10 max-w-[90%] rounded-xl lg:max-w-[50%] w-auto'>
                 <div className='border-b-[1px] pb-5 mb-2'>
-                    <p className='text-3xl max-w-[600px] font-medium'>{data.title}</p>
+                    <p className='text-3xl max-w-[600px] font-medium text-[#20352e]'>{data.title}</p>
                     <p className='text-silver'>By {data.seller}</p>
                     <div className="flex items-center">
                         <p className='mr-1 text-sm'>{data.stars}</p>
@@ -253,12 +299,19 @@ const ProductPage = () => {
                         </button>
                     </div>
                 </div>
+                <EcoScore
+                  score={data.ecoScore}
+                  rating={data.ecoRating}
+                  summary={data.ecoSummary}
+                  factors={data.ecoFactors}
+                  tags={data.sustainabilityTags}
+                />
                 <div className='flex gap-5 items-center'>
                     <p className='font-bold text-3xl'>$ {data.discountedprice}</p>
                     <p className='line-through'>$ {data.price}</p>
                     <p className='text-yellow-500'>{percentageDifference(parseInt(data.discountedprice),parseInt(data.price))}% off</p>
                 </div>
-                <p><span className='font-semibold'>In stock</span>: Dispatch in 5 working days</p>
+                <p><span className='font-semibold text-[#2f8064]'>In stock</span>: Dispatch in 5 working days</p>
                 <div className='flex gap-10 items-center'>
                     <p>Quantity</p>
                     <div className='flex items-center justify-center rounded-xl bg-gray-100'>
@@ -304,19 +357,19 @@ const ProductPage = () => {
                 </div> */}
                 <div className='flex gap-4 flex-wrap mb-10 border-b-[1px] pb-5 text-sm'>
                     <div className='flex gap-2'>
-                        <div className='bg-yellow-300 rounded-full px-2 py-2'>
+                        <div className='bg-[#dcebd7] text-[#2f8064] rounded-full px-2 py-2'>
                         <ShoppingCartIcon width={30}/>
                         </div>
                         <p className='w-[135px]'>Get it by Thu, 20 Aug</p>
                     </div>
                     <div className='flex gap-2'>
-                        <div className='bg-yellow-300 rounded-full px-2 py-2'>
+                        <div className='bg-[#dcebd7] text-[#2f8064] rounded-full px-2 py-2'>
                         <ReceiptRefundIcon width={30}/>
                         </div>
                         <p className='w-[135px]'>Easy returns available</p>
                     </div>
                     <div className='flex gap-1'>
-                        <div className='bg-yellow-300 rounded-full px-2 py-2'>
+                        <div className='bg-[#dcebd7] text-[#2f8064] rounded-full px-2 py-2'>
                         <CurrencyRupeeIcon width={30}/>
                         </div>
                         <p className='w-[135px]'>Cash on delivery available</p>

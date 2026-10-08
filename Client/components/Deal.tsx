@@ -5,6 +5,7 @@ import Stars from './ProductUi/Stars';
 import { dealDataHandler } from '@/app/api/homeData';
 import Link from 'next/link';
 import Loading from './Loading';
+import { fallbackEcoDeals } from '@/app/data';
 interface DealProduct {
     productid: number;
     title: string;
@@ -26,11 +27,16 @@ const Deal = () => {
         const res = await dealDataHandler();
         switch (res.status) {
           case 200:
-            data.current = res.deals.data;
+            if (res.deals?.data && res.deals.data.length > 0) {
+              data.current = res.deals.data;
+            } else {
+              data.current = fallbackEcoDeals as any;
+            }
             setloading(false);
             break;
           default:
-    
+            data.current = fallbackEcoDeals as any;
+            setloading(false);
             break;
         }
     }
@@ -55,10 +61,10 @@ const Deal = () => {
                     </a>
                     <p className='text-base tracking-normal text-silver'>{each.description}</p>
                     <div className='flex items-center'>
-                        <p className='text-2xl font-bold text-salmon'>${each.price}</p>
+                        <p className='text-2xl font-bold text-[#2f8064]'>${each.price}</p>
                         <p className='text-xl line-through ml-4 text-silver'>${each.discount}</p>
                     </div>
-                    <Link href={`/product/${each.productid}`}><button className='bg-salmon p-2 rounded-xl w-[165px] h-[45px] text-white font-bold text-lg hover:bg-black hover:text-white transition-colors duration-200'>Visit Product</button></Link>
+                    <Link href={`/product/${each.productid}`}><button className='bg-[#2f8064] hover:bg-[#1b4e3d] p-2 rounded-xl w-[175px] h-[45px] text-white font-semibold text-base transition-colors duration-200 shadow-md flex items-center justify-center gap-2'><span>🌿</span> Visit Product</button></Link>
                     <div className='flex justify-between'>
                         <p className='text-sm'>ALREADY SOLD: <span className='font-bold'>{each.sold}</span></p>
                         <p className='text-sm'>AVAILABLE: <span className='font-bold'>{each.available}</span></p>

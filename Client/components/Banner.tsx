@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { bannerDataHandler } from '@/app/api/homeData';
 import Loading from './Loading';
+import { fallbackEcoBanners } from '@/app/data';
 interface Banner {
   bannerid: number;
   toptitle: string;
@@ -19,21 +20,30 @@ const Banner = () => {
   const [loading, setloading] = useState(true);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.current.length);
+    if (data.current.length > 0) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % data.current.length);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + data.current.length) % data.current.length);
+    if (data.current.length > 0) {
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + data.current.length) % data.current.length);
+    }
   };
   async function sync(){
     const res = await bannerDataHandler();
     switch (res.status) {
       case 200:
-        data.current = res.banners.data;
+        if (res.banners?.data && res.banners.data.length > 0) {
+          data.current = res.banners.data;
+        } else {
+          data.current = fallbackEcoBanners as any;
+        }
         setloading(false);
         break;
       default:
-
+        data.current = fallbackEcoBanners as any;
+        setloading(false);
         break;
     }
   }
@@ -64,7 +74,7 @@ const Banner = () => {
                     {each.bottomtitle}{' '}
                     <span className='lg:text-4xl font-bold'>{each.startprice}</span>
                   </p>
-                  <button className='sm:p-2 p-1 bg-salmon text-white px-5 sm:w-[130px] w-[120px] text-sm sm:text-base rounded-md font-semibold'>
+                  <button className='sm:p-2.5 p-1.5 bg-[#2f8064] hover:bg-[#1b4e3d] text-white px-5 sm:w-[160px] w-[140px] text-sm sm:text-base rounded-lg font-semibold transition-all duration-300 shadow-md'>
                     {each.buttontitle}
                   </button>
                 </div>

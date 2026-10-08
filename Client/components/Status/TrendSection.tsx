@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import TrendingPrimary from './TrendingSec'
 import { topDataHandler } from '@/app/api/homeData';
 import Loading from '../Loading';
+import { fallbackEcoProducts } from '@/app/data';
 interface Product {
     productid: number;
     title: string;
@@ -23,8 +24,24 @@ const TrendSection = () => {
     const [loading, setloading] = useState(true);
     async function sync(){
         const res = await topDataHandler();
-        if (res.status === 200) {
+        if (res.status === 200 && res.data?.data?.trending?.length > 0) {
             data.current = res.data.data;
+        } else {
+            const mapped = fallbackEcoProducts.map(p => ({
+                productid: p.productid,
+                title: p.title,
+                price: parseFloat(p.price),
+                discount: parseFloat(p.discount),
+                imglink: p.images.imglink,
+                imgalt: p.images.imgalt,
+                category_name: p.category,
+                maincategory: p.maincategory
+            }));
+            data.current = {
+                trending: mapped.slice(0, 8),
+                top_rated: mapped.slice(4, 12).concat(mapped.slice(0, 2)),
+                new_arrival: mapped.slice(2, 10)
+            };
         }
         setloading(false);
     }

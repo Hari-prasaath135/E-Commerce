@@ -5,6 +5,8 @@ import NoProduct from './Search/NoProduct';
 import Loading from './Loading';
 import Link from 'next/link';
 import { homeProductsDataHandler } from '@/app/api/homeData';
+import EcoScore from './ProductUi/EcoScore';
+import { fallbackEcoProducts } from '@/app/data';
 interface Color {
   colorid:number;
   name: string;
@@ -40,6 +42,8 @@ interface Product {
   sizes: Size[];  // assuming sizes is an array of strings
   reviewCount: number;
   images: ProductImage;
+  ecoScore?: number | null;
+  ecoRating?: string | null;
 }
 const defaultProduct: Product = {
   productid: 0,
@@ -59,7 +63,9 @@ const defaultProduct: Product = {
       imageid: 0,
       imglink: "",
       imgalt: ""
-  }
+  },
+  ecoScore: null,
+  ecoRating: null
 };
 const ProductCard = ({ product }:{ product:Product }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -71,7 +77,7 @@ const ProductCard = ({ product }:{ product:Product }) => {
   }
   return (
     <div
-      className='relative flex flex-col border-[1px] rounded-xl lg:max-h-[400px] sm:max-w-[220px] p-1 overflow-hidden transition-shadow duration-300 hover:shadow-lg'
+      className='relative flex flex-col border-[1px] border-[#d9e5d7] bg-white rounded-xl lg:max-h-[440px] sm:max-w-[220px] p-1 overflow-hidden transition-shadow duration-300 hover:shadow-lg'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -93,6 +99,7 @@ const ProductCard = ({ product }:{ product:Product }) => {
       )}
       <div className={`relative transition-transform mb-1 duration-300 ${isHovered && 'scale-105'}`}>
         <img className='min-w-[200px] min-h-[210px]' src={product.images.imglink} alt={product.title} />
+        <div className="absolute left-2 bottom-2"><EcoScore compact score={product.ecoScore} rating={product.ecoRating} /></div>
         {isHovered && (
           <button
             className='absolute bottom-2 left-1/2 rounded-xl transform -translate-x-1/2 w-[100px] h-[30px] flex items-center justify-center bg-black bg-opacity-50 text-white text-sm uppercase transition-opacity duration-300'
@@ -102,8 +109,8 @@ const ProductCard = ({ product }:{ product:Product }) => {
         )}
       </div>
       <div className='pl-4 pr-4 flex flex-col gap-2'>
-        <Link href={categoryLink(product.maincategory,product.category)}><p className='text-[14px] text-salmon'>{product.category}</p></Link>
-        <Link href={`/product/${product.productid}`}><p className='tracking-[1px] text-silver hover:text-davysilver'>{product.title}</p></Link>
+        <Link href={categoryLink(product.maincategory,product.category)}><p className='text-[14px] text-[#5c8e65]'>{product.category}</p></Link>
+        <Link href={`/product/${product.productid}`}><p className='tracking-[1px] text-[#294338] hover:text-[#2f8064]'>{product.title}</p></Link>
         <div className='flex items-center gap-2'>
           <Stars stars={product.stars}/>
           {product.reviewCount > 0 && <p className=' text-silver'>{product.reviewCount}</p>}
@@ -123,16 +130,21 @@ const Products = () => {
   const [loading, setloading] = useState(true);
   async function sync(){
     const res = await homeProductsDataHandler();
-        switch (res.status) {
-        case 200:
-            products.current = res.data.data;
-            dataChecked.current = true;
-            setloading(false);
-            break;
-        default:
-          dataChecked.current = true;
-          setloading(false);
-          break;
+    switch (res.status) {
+      case 200:
+        if (res.data?.data && res.data.data.length > 0) {
+          products.current = res.data.data;
+        } else {
+          products.current = fallbackEcoProducts as any;
+        }
+        dataChecked.current = true;
+        setloading(false);
+        break;
+      default:
+        products.current = fallbackEcoProducts as any;
+        dataChecked.current = true;
+        setloading(false);
+        break;
     }
   }
   useLayoutEffect(() => {

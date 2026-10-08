@@ -20,16 +20,16 @@ const Category = () => {
         transition: 'margin-top 0.2s ease-in-out, opacity 0.3s ease-in-out'
       }} className='xl:min-h-[450px] xl:min-w-[1280px] min-h-[400px] min-w-[1000px] xl:-left-40 z-30 absolute bg-white flex gap-5 rounded-lg drop-shadow-md px-8 py-8'>
         {categoryDropDown.map((each,index)=>
-            <div key={index}>
-                <div className='border-b-[1px] pb-3'>
-                <a href={`/categories/${each.catLink}`} className='font-semibold text-base'>{each.title}</a>
+            <div key={index} className='flex-1'>
+                <div className='border-b-[1px] border-[#e2ede1] pb-3'>
+                <a href={each.catLink.startsWith('/') ? each.catLink : `/categories/${each.catLink}`} className='font-bold text-base text-[#164c3b] hover:text-[#2f8064] transition-colors'>{each.title}</a>
                 </div>
-                <div className='flex flex-col gap-2 mb-8 mt-5'>
-                    {each.subCategories.map((each,index)=>
-                        <a href={each.link} className='text-silver hover:text-salmon' key={index}>{each.title}</a>
+                <div className='flex flex-col gap-2 mb-6 mt-4'>
+                    {each.subCategories.map((sub,subIndex)=>
+                        <a href={sub.link} className='text-[#577265] text-sm hover:text-[#2f8064] transition-colors' key={subIndex}>{sub.title}</a>
                     )}
                 </div>
-                <a href={each.imgRedirectLink}><img height={80} width={300} className='rounded-lg' src={each.imgLink}/></a>
+                <a href={each.catLink}><img height={120} width={260} className='rounded-lg object-cover h-[130px] w-full shadow-sm hover:opacity-90 transition-opacity' src={each.imgLink} alt={each.imgAlt}/></a>
             </div>
         )}
     </div>

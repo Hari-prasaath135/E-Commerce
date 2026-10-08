@@ -5,6 +5,7 @@ import Stars from '../ProductUi/Stars';
 import Link from 'next/link';
 import { sidebarDataHandler } from '@/app/api/homeData';
 import Loading from '../Loading';
+import { fallbackEcoProducts } from '@/app/data';
 interface Product {
     productid: number;
     title: string;
@@ -27,11 +28,36 @@ const SidebarS = () => {
         const res = await sidebarDataHandler();
         switch (res.status) {
           case 200:
-            data.current = res.data.data;
+            if (res.data?.data && res.data.data.length > 0) {
+              data.current = res.data.data;
+            } else {
+              data.current = fallbackEcoProducts.slice(0, 4).map(p => ({
+                productid: p.productid,
+                title: p.title,
+                price: parseFloat(p.price),
+                discount: parseFloat(p.discount),
+                imglink: p.images.imglink,
+                imgalt: p.images.imgalt,
+                category_name: p.category,
+                stars: p.stars,
+                rating: 5
+              }));
+            }
             setloading(false);
             break;
           default:
-    
+            data.current = fallbackEcoProducts.slice(0, 4).map(p => ({
+                productid: p.productid,
+                title: p.title,
+                price: parseFloat(p.price),
+                discount: parseFloat(p.discount),
+                imglink: p.images.imglink,
+                imgalt: p.images.imgalt,
+                category_name: p.category,
+                stars: p.stars,
+                rating: 5
+            }));
+            setloading(false);
             break;
         }
     }

@@ -22,7 +22,7 @@ If you have ideas for new features or improvements, please submit them as issues
 
 ### Code Contributions
 
-1. **Fork the Repository**: Click the "Fork" button at the top right of the repository page.
+1. **Fork the Repository**: Click the "Fork" button at the top right of the repository page.sdS
 
 2. **Clone Your Fork**: 
    ```sh
